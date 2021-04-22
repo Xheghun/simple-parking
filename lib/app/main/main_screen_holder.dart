@@ -3,14 +3,9 @@ import 'package:provider/provider.dart';
 import 'package:simple_parking/app/main/main_screen_viemodel.dart';
 import 'package:simple_parking/app/res/colors.dart';
 
-class MainScreen extends StatefulWidget {
+class MainScreen extends StatelessWidget {
   static const routeName = "/mainScreen";
 
-  @override
-  _MainScreenState createState() => _MainScreenState();
-}
-
-class _MainScreenState extends State<MainScreen> {
   @override
   Widget build(BuildContext context) {
     return ChangeNotifierProvider(
