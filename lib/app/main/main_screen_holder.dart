@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:simple_parking/app/main/main_screen_viemodel.dart';
 import 'package:simple_parking/app/res/colors.dart';
 
 class MainScreen extends StatefulWidget {
@@ -9,27 +11,27 @@ class MainScreen extends StatefulWidget {
 }
 
 class _MainScreenState extends State<MainScreen> {
-  int _currentItem = 0;
-  void changeItem(int page) {
-    setState(() {
-      _currentItem = page;
-    });
-  }
-
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      bottomNavigationBar: BottomNavigationBar(
-        onTap: changeItem,
-        currentIndex: _currentItem,
-        type: BottomNavigationBarType.shifting,
-        showUnselectedLabels: false,
-        selectedItemColor: colorPrimary,
-        unselectedItemColor: colorPrimaryLight,
-        items: [
-          BottomNavigationBarItem(icon: Icon(Icons.home), label: 'Home'),
-          BottomNavigationBarItem(icon: Icon(Icons.book), label: 'Saved'),
-        ],
+    return ChangeNotifierProvider(
+      create: (_) => MainScreenViewModel(),
+      child: Consumer<MainScreenViewModel>(
+        builder: (context, model, _) {
+          return Scaffold(
+            bottomNavigationBar: BottomNavigationBar(
+              onTap: model.changeItem,
+              currentIndex: model.currentPage,
+              type: BottomNavigationBarType.shifting,
+              showUnselectedLabels: false,
+              selectedItemColor: colorPrimary,
+              unselectedItemColor: colorPrimaryLight,
+              items: [
+                BottomNavigationBarItem(icon: Icon(Icons.home), label: 'Home'),
+                BottomNavigationBarItem(icon: Icon(Icons.book), label: 'Saved'),
+              ],
+            ),
+          );
+        },
       ),
     );
   }
