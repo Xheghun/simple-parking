@@ -16,10 +16,6 @@ class MainScreen extends StatelessWidget {
             bottomNavigationBar: BottomNavigationBar(
               onTap: model.changeItem,
               currentIndex: model.currentPage,
-              type: BottomNavigationBarType.shifting,
-              showUnselectedLabels: false,
-              selectedItemColor: colorPrimary,
-              unselectedItemColor: colorPrimaryLight,
               items: [
                 BottomNavigationBarItem(icon: Icon(Icons.home), label: 'Home'),
                 BottomNavigationBarItem(icon: Icon(Icons.book), label: 'Saved'),

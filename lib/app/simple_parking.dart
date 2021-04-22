@@ -9,6 +9,7 @@ class SimpleParking extends StatelessWidget {
     return MaterialApp(
       onGenerateRoute: RouteGenerator.generateRoute,
       theme: AppTheme.defaultTheme(),
+      
       initialRoute: MainScreen.routeName,
     );
   }

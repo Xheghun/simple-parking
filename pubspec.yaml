@@ -19,6 +19,8 @@ dependencies:
   data_connection_checker: ^0.3.4
   get_it: ^6.1.1
   equatable: ^2.0.0
+  google_fonts: ^2.0.0
+
 
 
 
