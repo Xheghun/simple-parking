@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-class ParkingSpots extends StatelessWidget {
-  static const routeName = "/parkingSpot";
+class SavedSpots extends StatelessWidget {
+  static const routeName = "/savedSpot";
 
   @override
   Widget build(BuildContext context) {
