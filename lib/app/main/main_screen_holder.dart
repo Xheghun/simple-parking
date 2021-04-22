@@ -13,6 +13,7 @@ class MainScreen extends StatelessWidget {
       child: Consumer<MainScreenViewModel>(
         builder: (context, model, _) {
           return Scaffold(
+            body: model.pages[model.currentPage],
             bottomNavigationBar: BottomNavigationBar(
               onTap: model.changeItem,
               currentIndex: model.currentPage,
