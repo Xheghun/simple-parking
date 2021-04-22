@@ -6,6 +6,10 @@ import 'package:simple_parking/app/res/style.dart';
 import 'package:simple_parking/feature/saved_parking/presentation/widget/widget.dart';
 
 class FavoriteParkingList extends StatelessWidget {
+
+  Widget _distance() {
+    return ();
+  }
   @override
   Widget build(BuildContext context) {
     ThemeData theme = Theme.of(context);
@@ -33,7 +37,13 @@ class FavoriteParkingList extends StatelessWidget {
             "Dubai Mall",
             style: theme.textTheme.headline2,
           ),
-          subtitle: RatingBarWidget(),
+          subtitle: Row(
+            mainAxisAlignment: MainAxisAlignment.start,
+            children: [
+              RatingBarWidget(),
+
+            ],
+          ),
         );
       },
     );
