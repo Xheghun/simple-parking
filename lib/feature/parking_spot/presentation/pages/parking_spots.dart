@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
+import 'package:simple_parking/feature/parking_spot/presentation/widget/search_bar.dart';
 
 class ParkingSpots extends StatelessWidget {
   static const routeName = "/parkingSpot";
@@ -17,16 +18,19 @@ class ParkingSpots extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: GoogleMap(
-        mapType: MapType.normal,
-        initialCameraPosition: _kGooglePlex,
-        onMapCreated: (GoogleMapController controller) {
-          _controller.complete(controller);
-        },
-      ),
-      floatingActionButton: FloatingActionButton(
-        child: Icon(Icons.search),
-        onPressed: () {},
+      body: SafeArea(
+        child: Stack(
+          children: [
+            GoogleMap(
+              mapType: MapType.terrain,
+              initialCameraPosition: _kGooglePlex,
+              onMapCreated: (GoogleMapController controller) {
+                _controller.complete(controller);
+              },
+            ),
+            SearchBar(),
+          ],
+        ),
       ),
     );
   }
