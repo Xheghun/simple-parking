@@ -12,12 +12,11 @@ class GetParkingLocationData implements ParkingLocationData {
   GetParkingLocationData(this.parkingLocationRepository);
 
   @override
-  Future<Location> getUserPosition() {
-    return parkingLocationRepository.getUserLocation();
-  }
+  Future<Location> getUserPosition() =>
+      parkingLocationRepository.getUserLocation();
 
   @override
-  Future<Either<Failure, List<ParkingPlace>>> getNearbyParking(Location location) {
-    return parkingLocationRepository.getNearbyParking(location);
-  }
+  Future<Either<Failure, List<ParkingPlace>>> getNearbyParking(
+          Location location) =>
+      parkingLocationRepository.getNearbyParking(location);
 }
