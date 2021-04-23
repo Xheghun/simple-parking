@@ -14,7 +14,8 @@ class ParkingLocationRepositoryImpl implements ParkingLocationRepository {
   final ParkingPlaceRemoteDataSource parkingPlaceRemoteDataSource;
 
   ParkingLocationRepositoryImpl(
-      {@required this.locationDataSource, this.parkingPlaceRemoteDataSource});
+      {@required this.locationDataSource,
+      @required this.parkingPlaceRemoteDataSource});
 
   @override
   Future<Location> getUserLocation() async {
