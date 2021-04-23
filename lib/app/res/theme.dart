@@ -26,7 +26,7 @@ class AppTheme {
         headline1: GoogleFonts.poppins(
             fontSize: 20, fontWeight: FontWeight.w600, color: colorPrimary),
         headline2:
-            GoogleFonts.poppins(fontSize: 18, fontWeight: FontWeight.w500),
+            GoogleFonts.poppins(fontSize: 18, color: colorPrimary, fontWeight: FontWeight.w500),
         bodyText1:
             GoogleFonts.poppins(fontSize: 16, fontWeight: FontWeight.w400),
         subtitle2: GoogleFonts.poppins(

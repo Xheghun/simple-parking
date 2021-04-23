@@ -61,14 +61,16 @@ class FavoriteParkingList extends StatelessWidget {
           onTap: () {},
           contentPadding: EdgeInsets.zero,
           leading: ClipRRect(
-            borderRadius: AppStyle.borderRadius6,
-            child: Material(
-              elevation: 4,
-              child: Image.asset(
-                "${imagePath}parking.jpg",
-                fit: BoxFit.cover,
-                height: 200,
-                width: 80,
+            borderRadius: AppStyle.borderRadius3,
+            child: Container(
+              height: 200,
+              width: 80,
+              child: Material(
+                elevation: 4,
+                child: Image.asset(
+                  "${imagePath}parking.jpg",
+                  fit: BoxFit.cover,
+                ),
               ),
             ),
           ),
@@ -78,7 +80,13 @@ class FavoriteParkingList extends StatelessWidget {
           ),
           subtitle: Column(
             children: [
+              SizedBox(
+                height: 3,
+              ),
               _location(),
+              SizedBox(
+                height: 4,
+              ),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [RatingBarWidget(), _distance()],
