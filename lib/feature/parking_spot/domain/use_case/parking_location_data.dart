@@ -1,5 +1,5 @@
-import 'package:google_maps_flutter/google_maps_flutter.dart';
+import 'package:simple_parking/feature/parking_spot/domain/entities/location.dart';
 
 abstract class ParkingLocationData {
-  Future<CameraPosition> getCameraPosition();
+  Future<UserLocation> getUserPosition();
 }

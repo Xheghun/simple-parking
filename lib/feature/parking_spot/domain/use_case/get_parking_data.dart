@@ -1,4 +1,4 @@
-import 'package:google_maps_flutter_platform_interface/src/types/camera.dart';
+import 'package:simple_parking/feature/parking_spot/domain/entities/location.dart';
 import 'package:simple_parking/feature/parking_spot/domain/repositories/parking_location_repository.dart';
 
 import 'parking_location_data.dart';
@@ -9,7 +9,7 @@ class GetParkingLocationData implements ParkingLocationData {
   GetParkingLocationData(this.parkingLocationRepository);
 
   @override
-  Future<CameraPosition> getCameraPosition() {
-    return parkingLocationRepository.getCameraPosition();
+  Future<UserLocation> getUserPosition() {
+    return parkingLocationRepository.getUserLocation();
   }
 }
