@@ -1,5 +1,5 @@
-class UserLocation {
+class Location {
   double lat;
   double lng;
-  UserLocation({this.lat, this.lng});
+  Location({this.lat, this.lng});
 }

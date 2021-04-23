@@ -9,15 +9,15 @@ class ParkingMapViewmodel extends BaseViewmodel {
   final GetParkingLocationData _parkingLocationData;
   Completer<GoogleMapController> _controller = Completer();
 
-  UserLocation _location = UserLocation(lat: 27.2, lng: 22.3);
+  Location _location = Location(lat: 27.2, lng: 22.3);
 
   ParkingMapViewmodel(this._parkingLocationData);
 
   Completer get controller => _controller;
-  UserLocation get location => _location;
+  Location get location => _location;
 
   void setCameraPosition() async {
-    UserLocation location = await _parkingLocationData.getUserPosition();
+    Location location = await _parkingLocationData.getUserPosition();
     GoogleMapController tempMapController = await _controller.future;
 
     var camPosition = CameraPosition(

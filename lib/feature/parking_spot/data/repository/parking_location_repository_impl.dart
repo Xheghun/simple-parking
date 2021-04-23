@@ -10,11 +10,11 @@ class ParkingLocationRepositoryImpl implements ParkingLocationRepository {
   ParkingLocationRepositoryImpl({@required this.locationDataSource});
 
   @override
-  Future<UserLocation> getUserLocation() async {
+  Future<Location> getUserLocation() async {
     try {
       return locationDataSource.getLocation();
     } on LocationError {
-      return UserLocation(lat: 2992.228, lng: 272.3222);
+      return Location(lat: 2992.228, lng: 272.3222);
     }
   }
 }

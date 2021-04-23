@@ -11,7 +11,7 @@ abstract class LocationDataSource {
 
   ///gets the user location if requestPermission returns true
   ///throws a [LocationError] if permission is denied
-  Future<UserLocation> getLocation();
+  Future<Location> getLocation();
 }
 
 class LocationDataSourceImpl implements LocationDataSource {
@@ -44,20 +44,21 @@ class LocationDataSourceImpl implements LocationDataSource {
   }
 
   @override
-  Future<UserLocation> getLocation() async {
+  Future<Location> getLocation() async {
     Either<LocationError, bool> permissionStatus = await requestPermission();
 
     return permissionStatus.fold((locationError) {
       throw locationError;
     }, (hasPermmission) async {
-      Position position = await Geolocator.getCurrentPosition();
+      Position position = await Geolocator.getCurrentPosition(
+          desiredAccuracy: LocationAccuracy.high);
 
       var parsedPosition = {
         "lat": position.latitude,
         "lng": position.longitude,
       };
 
-      return UserLocationModel.parseLocation(parsedPosition);
+      return LocationModel.parseLocation(parsedPosition);
     });
   }
 }

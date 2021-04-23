@@ -9,7 +9,7 @@ class GetParkingLocationData implements ParkingLocationData {
   GetParkingLocationData(this.parkingLocationRepository);
 
   @override
-  Future<UserLocation> getUserPosition() {
+  Future<Location> getUserPosition() {
     return parkingLocationRepository.getUserLocation();
   }
 }
