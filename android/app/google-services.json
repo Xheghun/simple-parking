@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "80374359571",
+    "project_id": "simple-parking-fbc61",
+    "storage_bucket": "simple-parking-fbc61.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:80374359571:android:7593d270917e14c10d81e6",
+        "android_client_info": {
+          "package_name": "com.xheghun.simpleparking"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "80374359571-e4g3c19pvi3sta4hk2sng58eb1q1h2ed.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.xheghun.simpleparking",
+            "certificate_hash": "7b4538f354dbcc3233de0018e50403e4292bdc54"
+          }
+        },
+        {
+          "client_id": "80374359571-u1fi4tkrrhk2392ksjt9aqtpcmqmumf0.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.xheghun.simpleparking",
+            "certificate_hash": "a2452a8fdb4579da96e15938fdb5364ad09accca"
+          }
+        },
+        {
+          "client_id": "80374359571-g0kbmgmlcbpgphjv9sdsi60h85sf6gaa.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAu0fYDVLK9XN8m8RgCTYeg85ynenJzmUE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "80374359571-g0kbmgmlcbpgphjv9sdsi60h85sf6gaa.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
