@@ -4,7 +4,7 @@ import 'package:simple_parking/feature/parking_spot/data/models/user_location_mo
 import 'package:simple_parking/feature/parking_spot/domain/entities/location.dart';
 import 'package:simple_parking/feature/parking_spot/error/location_error.dart';
 
-abstract class LocationData {
+abstract class LocationDataSource {
   ///checks if the location service is enabled and also
   ///request the  user's location permission
   Future<Either<LocationError, bool>> requestPermission();
@@ -14,7 +14,7 @@ abstract class LocationData {
   Future<UserLocation> getLocation();
 }
 
-class LocationDataImpl implements LocationData {
+class LocationDataSourceImpl implements LocationDataSource {
   @override
   Future<Either<LocationError, bool>> requestPermission() async {
     LocationError locationError = LocationError(LocationErrorType.NOT_ENABLED,
