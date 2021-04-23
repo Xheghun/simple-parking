@@ -21,7 +21,7 @@ class ParkingMapViewmodel extends BaseViewmodel {
   Location get location => _location;
   List<ParkingPlace> get parkingPlaces => _parkingPlaces;
 
-  void _getParkingPlaces() async {
+  void getParkingPlaces() async {
     var response = await _parkingLocationData.getNearbyParking(_location);
     response.fold((failure) {
       if (failure is ServerFailure) print(failure.message);
@@ -44,7 +44,5 @@ class ParkingMapViewmodel extends BaseViewmodel {
 
     tempMapController
         .animateCamera(CameraUpdate.newCameraPosition(camPosition));
-
-    _getParkingPlaces();
   }
 }

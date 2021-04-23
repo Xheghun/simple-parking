@@ -29,6 +29,8 @@ class _MapWidgetState extends State<MapWidget>
 
   @override
   void afterFirstLayout(BuildContext context) {
-    _model.setCameraPosition();
+    _model.setCameraPosition().then((value) {
+      _model.getParkingPlaces();
+    });
   }
 }
