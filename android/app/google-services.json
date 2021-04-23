@@ -7,25 +7,25 @@
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:80374359571:android:7593d270917e14c10d81e6",
+        "mobilesdk_app_id": "1:80374359571:android:4c648870b0aed8620d81e6",
         "android_client_info": {
-          "package_name": "com.xheghun.simpleparking"
+          "package_name": "com.xheghun.simple_parking"
         }
       },
       "oauth_client": [
         {
-          "client_id": "80374359571-e4g3c19pvi3sta4hk2sng58eb1q1h2ed.apps.googleusercontent.com",
+          "client_id": "80374359571-c2spg24q41uqfa7ie515v52085odccct.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
-            "package_name": "com.xheghun.simpleparking",
+            "package_name": "com.xheghun.simple_parking",
             "certificate_hash": "7b4538f354dbcc3233de0018e50403e4292bdc54"
           }
         },
         {
-          "client_id": "80374359571-u1fi4tkrrhk2392ksjt9aqtpcmqmumf0.apps.googleusercontent.com",
+          "client_id": "80374359571-qbbptr4a12tihelbh23tjl1j41btu9db.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
-            "package_name": "com.xheghun.simpleparking",
+            "package_name": "com.xheghun.simple_parking",
             "certificate_hash": "a2452a8fdb4579da96e15938fdb5364ad09accca"
           }
         },
