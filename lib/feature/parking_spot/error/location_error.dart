@@ -1,0 +1,1 @@
+class LocationError implements Exception {}
