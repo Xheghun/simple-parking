@@ -5,5 +5,5 @@ import 'package:simple_parking/feature/parking_spot/domain/entities/parking_plac
 
 abstract class ParkingLocationRepository {
   Future<Location> getUserLocation();
-  Future<Either<Failure, ParkingPlace>> getNearbyParking(Location location);
+  Future<Either<Failure, List<ParkingPlace>>> getNearbyParking(Location location);
 }

@@ -26,7 +26,7 @@ class ParkingLocationRepositoryImpl implements ParkingLocationRepository {
   }
 
   @override
-  Future<Either<Failure, ParkingPlace>> getNearbyParking(
+  Future<Either<Failure, List<ParkingPlace>>> getNearbyParking(
       Location location) async {
     try {
       return Right(

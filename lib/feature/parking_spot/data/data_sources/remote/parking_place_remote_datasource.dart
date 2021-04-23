@@ -7,9 +7,9 @@ import 'package:meta/meta.dart';
 import 'package:simple_parking/keys.dart';
 
 abstract class ParkingPlaceRemoteDataSource {
-  //get a list of nearby parking from the google places api
+  ///get a list of nearby parking from the google places api
   ///throws a [ServerError] if an error occurs
-  Future<ParkingPlace> getNearbyParking(Location location);
+  Future<List<ParkingPlace>> getNearbyParking(Location location);
 }
 
 class ParkingPlaceRemoteDataSourceImpl implements ParkingPlaceRemoteDataSource {
@@ -18,7 +18,7 @@ class ParkingPlaceRemoteDataSourceImpl implements ParkingPlaceRemoteDataSource {
   ParkingPlaceRemoteDataSourceImpl({@required this.client});
 
   @override
-  Future<ParkingPlace> getNearbyParking(Location location) async {
+  Future<List<ParkingPlace>> getNearbyParking(Location location) async {
     String url = "https://maps.googleapis.com/maps/api/place/nearbysearch/json";
 
     Map<String, dynamic> queryParam = {
@@ -31,7 +31,11 @@ class ParkingPlaceRemoteDataSourceImpl implements ParkingPlaceRemoteDataSource {
     try {
       final response = await client.get(url, queryParameters: queryParam);
       if (response.statusCode == 200) {
-        return ParkingPlaceModel.fromJson(response.data);
+        List<ParkingPlace> parkingList = response.data["response"]
+            .map((e) => ParkingPlaceModel.fromJson(e))
+            .toList();
+
+        return parkingList;
       }
     } on DioError catch (error) {
       print(error.message);
