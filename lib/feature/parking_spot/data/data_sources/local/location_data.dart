@@ -1,5 +1,6 @@
 import 'package:dartz/dartz.dart';
 import 'package:geolocator/geolocator.dart';
+import 'package:simple_parking/feature/parking_spot/data/models/user_location_model.dart';
 import 'package:simple_parking/feature/parking_spot/domain/entities/location.dart';
 import 'package:simple_parking/feature/parking_spot/error/location_error.dart';
 
@@ -46,10 +47,17 @@ class LocationDataImpl implements LocationData {
   Future<UserLocation> getLocation() async {
     Either<LocationError, bool> permissionStatus = await requestPermission();
 
-    permissionStatus.fold((locationError) {
+    return permissionStatus.fold((locationError) {
       throw locationError;
-    }, (hasPermmission) {
-      
+    }, (hasPermmission) async {
+      Position position = await Geolocator.getCurrentPosition();
+
+      var parsedPosition = {
+        "lat": position.latitude,
+        "lng": position.longitude,
+      };
+
+      return UserLocationModel.parseLocation(parsedPosition);
     });
   }
 }
