@@ -17,7 +17,7 @@ class ParkingPlace {
   String icon;
   String name;
   String placeId;
-  int rating;
+  num rating;
   int userRatingsTotal;
   String vicinity;
 }

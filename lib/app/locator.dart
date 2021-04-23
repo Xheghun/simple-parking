@@ -18,8 +18,10 @@ setupLocator() {
     ..registerLazySingleton(() => GetParkingLocationData(locator()))
 
     //repository
-    ..registerLazySingleton<ParkingLocationRepository>(
-        () => ParkingLocationRepositoryImpl(locationDataSource: locator()))
+    ..registerLazySingleton<ParkingLocationRepository>(() =>
+        ParkingLocationRepositoryImpl(
+            locationDataSource: locator(),
+            parkingPlaceRemoteDataSource: locator()))
 
     //data
     ..registerLazySingleton<LocationDataSource>(() => LocationDataSourceImpl())

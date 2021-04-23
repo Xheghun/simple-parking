@@ -31,10 +31,11 @@ class ParkingPlaceRemoteDataSourceImpl implements ParkingPlaceRemoteDataSource {
     try {
       final response = await client.get(url, queryParameters: queryParam);
 
-      print(response.data);
+      print("location is: ${location.lat}, ${location.lng}");
+      print(response.data["results"]);
 
       if (response.statusCode == 200) {
-        List<ParkingPlace> parkingList = response.data["response"]
+        List<ParkingPlace> parkingList = List.from(response.data["results"])
             .map((e) => ParkingPlaceModel.fromJson(e))
             .toList();
 

@@ -22,7 +22,7 @@ class ParkingMapViewmodel extends BaseViewmodel {
   List<ParkingPlace> get parkingPlaces => _parkingPlaces;
 
   void _getParkingPlaces() async {
-    var response = await _parkingLocationData.getNearbyParking(location);
+    var response = await _parkingLocationData.getNearbyParking(_location);
     response.fold((failure) {
       if (failure is ServerFailure) print(failure.message);
     }, (parkingLocations) {
@@ -31,11 +31,10 @@ class ParkingMapViewmodel extends BaseViewmodel {
     notifyListeners();
   }
 
-  void setCameraPosition() async {
-    Location location = await _parkingLocationData.getUserPosition();
+  Future setCameraPosition() async {
+    _location = await _parkingLocationData.getUserPosition();
+    notifyListeners();
     GoogleMapController tempMapController = await _controller.future;
-
-    _getParkingPlaces();
 
     var camPosition = CameraPosition(
         zoom: 15,
@@ -45,6 +44,7 @@ class ParkingMapViewmodel extends BaseViewmodel {
 
     tempMapController
         .animateCamera(CameraUpdate.newCameraPosition(camPosition));
-    notifyListeners();
+
+    _getParkingPlaces();
   }
 }
