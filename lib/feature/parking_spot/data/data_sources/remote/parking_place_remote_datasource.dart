@@ -1,4 +1,3 @@
-import 'package:dartz/dartz.dart';
 import 'package:dio/dio.dart';
 import 'package:simple_parking/feature/parking_spot/data/models/parking_place_model.dart';
 import 'package:simple_parking/feature/parking_spot/domain/entities/location.dart';
@@ -7,16 +6,16 @@ import 'package:simple_parking/feature/parking_spot/error/server_error.dart';
 import 'package:meta/meta.dart';
 import 'package:simple_parking/keys.dart';
 
-abstract class ParkingSpotRemoteDataSource {
+abstract class ParkingPlaceRemoteDataSource {
   //get a list of nearby parking from the google places api
   ///throws a [ServerError] if an error occurs
   Future<ParkingPlace> getNearbyParking(Location location);
 }
 
-class ParkingSpotRemoteDataSourceImpl implements ParkingSpotRemoteDataSource {
+class ParkingPlaceRemoteDataSourceImpl implements ParkingPlaceRemoteDataSource {
   final Dio client;
 
-  ParkingSpotRemoteDataSourceImpl({@required this.client});
+  ParkingPlaceRemoteDataSourceImpl({@required this.client});
 
   @override
   Future<ParkingPlace> getNearbyParking(Location location) async {
