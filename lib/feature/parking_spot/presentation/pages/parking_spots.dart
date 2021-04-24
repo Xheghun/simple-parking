@@ -4,7 +4,6 @@ import 'package:simple_parking/app/util/helpers.dart';
 import 'package:simple_parking/core/errors/codes.dart';
 
 import '../../../../app/locator.dart';
-import '../../domain/use_case/get_parking_data.dart';
 import '../viewmodel/parking_map_viewmodel.dart';
 import '../widget/widget.dart';
 
