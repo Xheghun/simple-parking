@@ -4,7 +4,7 @@ import 'package:meta/meta.dart';
 
 abstract class SavedParkingLocalDataSource {
   Future<void> savePlace(ParkingPlace place);
-  Future<List<ParkingPlace>> parkingPlace();
+  Future<List<ParkingPlace>> savedParkingPlaces();
 }
 
 class SavedParkingPlaceLocalDataSourceImpl
@@ -14,7 +14,7 @@ class SavedParkingPlaceLocalDataSourceImpl
   SavedParkingPlaceLocalDataSourceImpl({@required this.box});
 
   @override
-  Future<List<ParkingPlace>> parkingPlace() {
+  Future<List<ParkingPlace>> savedParkingPlaces() {
     // TODO: implement parkingPlace
     throw UnimplementedError();
   }

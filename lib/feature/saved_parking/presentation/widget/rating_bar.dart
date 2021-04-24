@@ -17,7 +17,7 @@ class RatingBarWidget extends StatelessWidget {
         halfFilledColor: colorPrimary,
         size: size,
         emptyColor: colorPrimary,
-        initialRating: rating.toDouble() ?? 0,
+        initialRating: rating?.toDouble() ?? 0,
         isHalfAllowed: true,
         maxRating: 5,
         halfFilledIcon: Icons.star_half,
