@@ -101,8 +101,8 @@ class ParkingMapViewmodel extends BaseViewmodel {
         expand: false,
         builder: (ctx) {
           return ParkingInfo(
-            parkingPlace: parkingPlace,
-          );
+              parkingPlace: parkingPlace,
+              onButtonPressed: () => savePlace(context, parkingPlace));
         });
   }
 }

@@ -17,13 +17,15 @@ class SavedParkingPlaceLocalDataSourceImpl
   SavedParkingPlaceLocalDataSourceImpl({@required this.sharedPreferences});
 
   @override
-  Future<List<ParkingPlace>> savedParkingPlaces() {
+  Future<List<ParkingPlace>> savedParkingPlaces() async {
     try {
       List<String> items = sharedPreferences.getStringList("places");
 
-      return Future.value(
-          items.map((e) => ParkingPlaceModel.fromJson(jsonDecode(e))).toList());
+      return items
+          .map((e) => ParkingPlaceModel.fromJson(jsonDecode(e)))
+          .toList();
     } catch (e) {
+      print(e);
       throw CacheError();
     }
   }

@@ -36,7 +36,8 @@ class ParkingPlaceModel extends ParkingPlace {
       ParkingPlaceModel(
         businessStatus:
             json["business_status"] == null ? null : json["business_status"],
-        location: LocationModel.fromJson(json["geometry"]["location"]),
+        location: LocationModel.fromJson(
+            json["location"] ?? json["geometry"]["location"]),
         icon: json["icon"] == null ? null : json["icon"],
         name: json["name"] == null ? null : json["name"],
         placeId: json["place_id"] == null ? null : json["place_id"],

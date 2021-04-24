@@ -3,11 +3,13 @@ import 'dart:ui';
 import 'package:after_layout/after_layout.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
 import 'package:provider/provider.dart';
 import 'package:simple_parking/app/res/colors.dart';
 import 'package:simple_parking/app/res/string.dart';
 import 'package:simple_parking/app/res/style.dart';
 import 'package:simple_parking/core/entities/parking_place.dart';
+import 'package:simple_parking/feature/parking_spot/presentation/widget/parking_info.dart';
 import 'package:simple_parking/feature/saved_parking/presentation/viewmodel/saved_parking_viewmodel.dart';
 import 'package:simple_parking/feature/saved_parking/presentation/widget/widget.dart';
 
@@ -73,7 +75,16 @@ class _FavoriteParkingListState extends State<FavoriteParkingList>
         ParkingPlace parkingPlace = _model.parkingList[index];
 
         return ListTile(
-          onTap: () {},
+          onTap: () {
+            showMaterialModalBottomSheet(
+                context: context,
+                builder: (context) => ParkingInfo(
+                      parkingPlace: parkingPlace,
+                      isSave: false,
+                      onButtonPressed:
+                          null, // _model.removePlace(parkingPlace),
+                    ));
+          },
           contentPadding: EdgeInsets.zero,
           leading: ClipRRect(
             borderRadius: AppStyle.borderRadius3,
@@ -101,8 +112,15 @@ class _FavoriteParkingListState extends State<FavoriteParkingList>
               SizedBox(
                 height: 4,
               ),
-              RatingBarWidget(
-                size: parkingPlace.rating,
+              Row(
+                children: [
+                  RatingBarWidget(
+                    rating: parkingPlace.rating,
+                  ),
+                  Expanded(
+                    child: SizedBox(),
+                  ),
+                ],
               )
             ],
           ),
