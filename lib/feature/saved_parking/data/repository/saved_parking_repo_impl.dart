@@ -11,11 +11,11 @@ class SavedParkingLocalRepositoryImpl implements SavedParkingLocalRepository {
   SavedParkingLocalRepositoryImpl({@required this.savedParkingLocalDataSource});
 
   @override
-  Future<Either<CacheError, void>> savePlace(ParkingPlace place) {
+  Future<Either<CacheError, bool>> savePlace(ParkingPlace place) async {
     try {
-      return savedParkingLocalDataSource.savePlace(place);
+      return Right(await savedParkingLocalDataSource.savePlace(place));
     } catch (e) {
-      return Future.value(Left(CacheError()));
+      return Left(CacheError());
     }
   }
 

@@ -4,15 +4,24 @@ import 'package:simple_parking/core/entities/parking_place.dart';
 import 'location_model.dart';
 
 class ParkingPlaceModel extends ParkingPlace {
+  final String businessStatus;
+  final LocationModel location;
+  final String icon;
+  final String name;
+  final String placeId;
+  final num rating;
+  final int userRatingsTotal;
+  final String vicinity;
+
   ParkingPlaceModel({
-    String businessStatus,
-    Location location,
-    String icon,
-    String name,
-    String placeId,
-    num rating,
-    int userRatingsTotal,
-    String vicinity,
+    this.businessStatus,
+    this.location,
+    this.icon,
+    this.name,
+    this.placeId,
+    this.rating,
+    this.userRatingsTotal,
+    this.vicinity,
   }) : super(
             businessStatus: businessStatus,
             location: location,
@@ -37,10 +46,10 @@ class ParkingPlaceModel extends ParkingPlace {
             : json["user_ratings_total"],
         vicinity: json["vicinity"] == null ? null : json["vicinity"],
       );
-/*
+
   Map<String, dynamic> toJson() => {
         "business_status": businessStatus == null ? null : businessStatus,
-        "location": location == null ? null : ),
+        "location": location == null ? null : location.toJson(),
         "icon": icon == null ? null : icon,
         "name": name == null ? null : name,
         "place_id": placeId == null ? null : placeId,
@@ -49,6 +58,4 @@ class ParkingPlaceModel extends ParkingPlace {
             userRatingsTotal == null ? null : userRatingsTotal,
         "vicinity": vicinity == null ? null : vicinity,
       };
-
-      */
 }

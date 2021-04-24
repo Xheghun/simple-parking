@@ -1,4 +1,5 @@
 import 'package:dartz/dartz.dart';
+import 'package:simple_parking/core/errors/server_error.dart';
 import 'package:simple_parking/core/failure/failure.dart';
 import 'package:simple_parking/feature/parking_spot/data/data_sources/local/location_datasoucre.dart';
 import 'package:simple_parking/feature/parking_spot/data/data_sources/remote/parking_place_remote_datasource.dart';
@@ -7,7 +8,6 @@ import 'package:simple_parking/core/entities/parking_place.dart';
 import 'package:simple_parking/feature/parking_spot/domain/repositories/parking_location_repository.dart';
 import 'package:meta/meta.dart';
 import 'package:simple_parking/feature/parking_spot/error/location_error.dart';
-import 'package:simple_parking/core/server_error.dart';
 
 class ParkingLocationRepositoryImpl implements ParkingLocationRepository {
   final LocationDataSource locationDataSource;
