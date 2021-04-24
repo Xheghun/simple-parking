@@ -28,6 +28,8 @@ dependencies:
   after_layout: ^1.1.0
   dio: ^4.0.0
   modal_bottom_sheet: ^2.0.0
+  hive: ^2.0.4
+  hive_flutter: ^1.0.0
   
 
 
@@ -39,6 +41,7 @@ dependencies:
 dev_dependencies:
   flutter_test:
     sdk: flutter
+  hive_generator: ^1.1.0
 
 flutter:
   uses-material-design: true
