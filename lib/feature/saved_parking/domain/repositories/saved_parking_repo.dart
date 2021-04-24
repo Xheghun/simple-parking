@@ -4,5 +4,5 @@ import 'package:simple_parking/core/errors/cache_error.dart';
 
 abstract class SavedParkingLocalRepository {
   Future<Either<CacheError, List<ParkingPlace>>> savedParkingPlaces();
-  Future<Either<CacheError,void>> savePlace(ParkingPlace place);
+  Future<Either<CacheError, void>> savePlace(ParkingPlace place);
 }
