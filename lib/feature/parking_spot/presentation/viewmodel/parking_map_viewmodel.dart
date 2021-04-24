@@ -8,7 +8,7 @@ import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
 import 'package:simple_parking/core/failure/failure.dart';
 import 'package:simple_parking/core/viewmodel/base_viewmodel.dart';
 import 'package:simple_parking/feature/parking_spot/domain/entities/location.dart';
-import 'package:simple_parking/feature/parking_spot/domain/entities/parking_place.dart';
+import 'package:simple_parking/core/entities/parking_place.dart';
 import 'package:simple_parking/feature/parking_spot/domain/use_case/get_parking_data.dart';
 import 'package:simple_parking/feature/parking_spot/presentation/widget/parking_info.dart';
 
@@ -81,7 +81,7 @@ class ParkingMapViewmodel extends BaseViewmodel {
     showMaterialModalBottomSheet(
         context: context,
         expand: false,
-        
+
         builder: (ctx) {
           return ParkingInfo(
             parkingPlace: parkingPlace,

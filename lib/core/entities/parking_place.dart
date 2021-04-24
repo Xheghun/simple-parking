@@ -1,4 +1,4 @@
-import 'location.dart';
+import '../../feature/parking_spot/domain/entities/location.dart';
 
 class ParkingPlace {
   ParkingPlace({

@@ -1,8 +1,8 @@
 import 'package:dio/dio.dart';
 import 'package:simple_parking/feature/parking_spot/data/models/parking_place_model.dart';
 import 'package:simple_parking/feature/parking_spot/domain/entities/location.dart';
-import 'package:simple_parking/feature/parking_spot/domain/entities/parking_place.dart';
-import 'package:simple_parking/feature/parking_spot/error/server_error.dart';
+import 'package:simple_parking/core/entities/parking_place.dart';
+import 'package:simple_parking/core/server_error.dart';
 import 'package:meta/meta.dart';
 import 'package:simple_parking/keys.dart';
 
