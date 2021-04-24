@@ -1,6 +1,8 @@
+import 'package:equatable/equatable.dart';
+
 import '../../feature/parking_spot/domain/entities/location.dart';
 
-class ParkingPlace {
+class ParkingPlace extends Equatable {
   ParkingPlace({
     this.businessStatus,
     this.location,
@@ -12,12 +14,15 @@ class ParkingPlace {
     this.vicinity,
   });
 
-  String businessStatus;
-  Location location;
-  String icon;
-  String name;
-  String placeId;
-  num rating;
-  int userRatingsTotal;
-  String vicinity;
+  final String businessStatus;
+  final Location location;
+  final String icon;
+  final String name;
+  final String placeId;
+  final num rating;
+  final int userRatingsTotal;
+  final String vicinity;
+
+  @override
+  List<Object> get props => [placeId, location];
 }
