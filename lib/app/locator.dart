@@ -10,7 +10,6 @@ import 'package:simple_parking/feature/parking_spot/presentation/viewmodel/parki
 import 'package:simple_parking/feature/saved_parking/data/data_sources/local/saved_parking_local_datascource.dart';
 import 'package:simple_parking/feature/saved_parking/data/repository/saved_parking_repo_impl.dart';
 import 'package:simple_parking/feature/saved_parking/domain/repositories/saved_parking_repo.dart';
-import 'package:simple_parking/feature/saved_parking/domain/use_case/saved_parking_usecases.dart';
 import 'package:simple_parking/feature/saved_parking/domain/use_case/saved_parking_usecases_impl.dart';
 
 var locator = GetIt.instance;
