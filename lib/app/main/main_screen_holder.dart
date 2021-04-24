@@ -14,13 +14,18 @@ class MainScreen extends StatelessWidget {
         builder: (context, model, _) {
           return Scaffold(
             body: model.pages[model.currentPage],
-            bottomNavigationBar: BottomNavigationBar(
-              onTap: model.changeItem,
-              currentIndex: model.currentPage,
-              items: [
-                BottomNavigationBarItem(icon: Icon(Icons.home), label: 'Home'),
-                BottomNavigationBarItem(icon: Icon(Icons.book), label: 'Saved'),
-              ],
+            bottomNavigationBar: Theme(
+              data: Theme.of(context).copyWith(canvasColor: colorPrimary),
+              child: BottomNavigationBar(
+                onTap: model.changeItem,
+                currentIndex: model.currentPage,
+                items: [
+                  BottomNavigationBarItem(
+                      icon: Icon(Icons.home), label: 'Home'),
+                  BottomNavigationBarItem(
+                      icon: Icon(Icons.book), label: 'Saved'),
+                ],
+              ),
             ),
           );
         },

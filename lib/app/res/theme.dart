@@ -5,12 +5,17 @@ import 'package:simple_parking/app/res/colors.dart';
 class AppTheme {
   static ThemeData defaultTheme() {
     return ThemeData(
+      floatingActionButtonTheme:
+          FloatingActionButtonThemeData(backgroundColor: colorPrimary),
       primaryColor: colorPrimary,
+      scaffoldBackgroundColor: Colors.white,
       primaryColorLight: colorPrimaryLight,
       fontFamily: GoogleFonts.poppins().fontFamily,
+      appBarTheme: AppBarTheme(elevation: 0, backgroundColor: Colors.white),
       bottomNavigationBarTheme: BottomNavigationBarThemeData(
-          selectedItemColor: colorPrimary,
-          unselectedItemColor: colorPrimaryLight,
+          backgroundColor: colorPrimary,
+          selectedItemColor: Colors.white,
+          unselectedItemColor: Colors.blueGrey,
           showUnselectedLabels: false,
           type: BottomNavigationBarType.shifting,
           selectedLabelStyle:
@@ -18,8 +23,10 @@ class AppTheme {
           unselectedLabelStyle:
               GoogleFonts.poppins(fontSize: 12, fontWeight: FontWeight.w400)),
       textTheme: TextTheme(
+        headline1: GoogleFonts.poppins(
+            fontSize: 20, fontWeight: FontWeight.w600, color: colorPrimary),
         headline2:
-            GoogleFonts.poppins(fontSize: 18, fontWeight: FontWeight.w500),
+            GoogleFonts.poppins(fontSize: 18, color: colorPrimary, fontWeight: FontWeight.w500),
         bodyText1:
             GoogleFonts.poppins(fontSize: 16, fontWeight: FontWeight.w400),
         subtitle2: GoogleFonts.poppins(
