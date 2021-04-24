@@ -79,6 +79,9 @@ class ParkingMapViewmodel extends BaseViewmodel {
   }
 
   void savePlace(BuildContext context, ParkingPlace place) async {
+//dismiss bottom sheet
+    Navigator.pop(context);
+
     var result = await _parkingLocationData.savePlace(place);
 
     snackbar(String text) {

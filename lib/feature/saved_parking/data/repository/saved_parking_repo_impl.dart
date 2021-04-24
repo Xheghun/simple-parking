@@ -21,7 +21,11 @@ class SavedParkingLocalRepositoryImpl implements SavedParkingLocalRepository {
   }
 
   @override
-  Future<Either<CacheFailure, List<ParkingPlace>>> savedParkingPlaces() {
-    throw UnimplementedError();
+  Future<Either<CacheFailure, List<ParkingPlace>>> savedParkingPlaces() async {
+    try {
+      return Right(await savedParkingLocalDataSource.savedParkingPlaces());
+    } on CacheError {
+      return Left(CacheFailure(message: "data not found"));
+    }
   }
 }
