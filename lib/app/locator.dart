@@ -33,10 +33,12 @@ setupLocator() async {
     ..registerLazySingleton(
         () => SavedParkingUseCasesImpl(savedParkingLocalRepository: locator()))
     //repository
-    ..registerLazySingleton<ParkingLocationRepository>(() =>
-        ParkingLocationRepositoryImpl(
-            locationDataSource: locator(),
-            parkingPlaceRemoteDataSource: locator()))
+    ..registerLazySingleton<ParkingLocationRepository>(
+        () => ParkingLocationRepositoryImpl(
+              locationDataSource: locator(),
+              parkingPlaceRemoteDataSource: locator(),
+              networkInfo: locator(),
+            ))
     ..registerLazySingleton<SavedParkingLocalRepository>(() =>
         SavedParkingLocalRepositoryImpl(savedParkingLocalDataSource: locator()))
 
