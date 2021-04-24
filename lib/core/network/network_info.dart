@@ -1,13 +1,15 @@
 import 'package:data_connection_checker/data_connection_checker.dart';
-import 'package:simple_parking/core/entities/network_info.dart';
 
 abstract class NetworkInfoContract {
   Future<bool> hasNetworkConnection();
 }
 
 class NetworkInfo implements NetworkInfoContract {
+  final DataConnectionChecker dataConnectionChecker;
+
+  NetworkInfo(this.dataConnectionChecker);
+
   @override
-  Future<bool> hasNetworkConnection() async {
-    return await DataConnectionChecker().hasConnection;
-  }
+  Future<bool> hasNetworkConnection() async =>
+      await dataConnectionChecker.hasConnection;
 }

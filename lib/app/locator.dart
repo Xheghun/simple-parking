@@ -1,6 +1,8 @@
+import 'package:data_connection_checker/data_connection_checker.dart';
 import 'package:dio/dio.dart';
 import 'package:get_it/get_it.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:simple_parking/core/network/network_info.dart';
 
 import '../feature/parking_spot/data/data_sources/local/location_datasoucre.dart';
 import '../feature/parking_spot/data/data_sources/remote/parking_place_remote_datasource.dart';
@@ -38,6 +40,9 @@ setupLocator() async {
     ..registerLazySingleton<SavedParkingLocalRepository>(() =>
         SavedParkingLocalRepositoryImpl(savedParkingLocalDataSource: locator()))
 
+    //helper
+    ..registerLazySingleton<NetworkInfoContract>(() => NetworkInfo(locator()))
+
     //data
     ..registerLazySingleton<LocationDataSource>(() => LocationDataSourceImpl())
     ..registerLazySingleton<ParkingPlaceRemoteDataSource>(
@@ -47,5 +52,6 @@ setupLocator() async {
 
     //external
     ..registerLazySingleton(() => Dio())
-    ..registerLazySingleton(() => sharedPreferences);
+    ..registerLazySingleton(() => sharedPreferences)
+    ..registerLazySingleton(() => DataConnectionChecker());
 }
