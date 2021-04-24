@@ -17,7 +17,6 @@ class SavedParkingPlaceLocalDataSourceImpl
 
   @override
   Future<List<ParkingPlace>> savedParkingPlaces() {
-    // TODO: implement parkingPlace
     throw UnimplementedError();
   }
 

@@ -21,7 +21,6 @@ class SavedParkingLocalRepositoryImpl implements SavedParkingLocalRepository {
 
   @override
   Future<Either<CacheError, List<ParkingPlace>>> savedParkingPlaces() {
-    // TODO: implement savedParkingPlaces
     throw UnimplementedError();
   }
 }
