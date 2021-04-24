@@ -11,6 +11,7 @@ import 'package:simple_parking/feature/saved_parking/data/data_sources/local/sav
 import 'package:simple_parking/feature/saved_parking/data/repository/saved_parking_repo_impl.dart';
 import 'package:simple_parking/feature/saved_parking/domain/repositories/saved_parking_repo.dart';
 import 'package:simple_parking/feature/saved_parking/domain/use_case/saved_parking_usecases_impl.dart';
+import 'package:simple_parking/feature/saved_parking/presentation/viewmodel/saved_parking_viewmodel.dart';
 
 var locator = GetIt.instance;
 
@@ -20,6 +21,7 @@ setupLocator() async {
   //viewmodel
   locator
     ..registerFactory(() => ParkingMapViewmodel(locator()))
+    ..registerFactory(() => SavedParkingViewModel(locator()))
 
     //use cases
     ..registerLazySingleton(() => GetParkingLocationData(
