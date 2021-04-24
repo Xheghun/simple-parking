@@ -2,11 +2,15 @@ import 'dart:async';
 import 'dart:collection';
 
 import 'package:flutter/painting.dart';
+import 'package:flutter/widgets.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
+import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
 import 'package:simple_parking/core/failure/failure.dart';
 import 'package:simple_parking/core/viewmodel/base_viewmodel.dart';
 import 'package:simple_parking/feature/parking_spot/domain/entities/location.dart';
+import 'package:simple_parking/feature/parking_spot/domain/entities/parking_place.dart';
 import 'package:simple_parking/feature/parking_spot/domain/use_case/get_parking_data.dart';
+import 'package:simple_parking/feature/parking_spot/presentation/widget/parking_info.dart';
 
 class ParkingMapViewmodel extends BaseViewmodel {
   final GetParkingLocationData _parkingLocationData;
@@ -32,7 +36,7 @@ class ParkingMapViewmodel extends BaseViewmodel {
   Location get location => _location;
   Set<Marker> get parkingMarkers => _parkingMarkers;
 
-  void getParkingPlaces({LatLng position}) async {
+  void getParkingPlaces(context, {LatLng position}) async {
     Location camLocation;
     if (position != null)
       camLocation = Location(lat: position.latitude, lng: position.longitude);
@@ -48,6 +52,7 @@ class ParkingMapViewmodel extends BaseViewmodel {
             infoWindow: InfoWindow(
               title: element.name,
             ),
+            onTap: () => showMarkerInfo(context, element),
             markerId: MarkerId("parking_place_${element.placeId}"),
             position: LatLng(element.location.lat, element.location.lng),
           ),
@@ -70,5 +75,17 @@ class ParkingMapViewmodel extends BaseViewmodel {
 
     tempMapController
         .animateCamera(CameraUpdate.newCameraPosition(camPosition));
+  }
+
+  void showMarkerInfo(BuildContext context, ParkingPlace parkingPlace) {
+    showMaterialModalBottomSheet(
+        context: context,
+        expand: false,
+        
+        builder: (ctx) {
+          return ParkingInfo(
+            parkingPlace: parkingPlace,
+          );
+        });
   }
 }

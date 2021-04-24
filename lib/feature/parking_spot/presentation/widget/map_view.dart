@@ -15,12 +15,11 @@ class _MapWidgetState extends State<MapWidget>
 
   @override
   Widget build(BuildContext context) {
-    
     _model = context.watch<ParkingMapViewmodel>();
     return GoogleMap(
       myLocationEnabled: true,
       onCameraMove: (position) {
-        _model.getParkingPlaces(position: position.target);
+        _model.getParkingPlaces(context, position: position.target);
       },
       mapType: MapType.normal,
       initialCameraPosition: CameraPosition(
@@ -35,7 +34,7 @@ class _MapWidgetState extends State<MapWidget>
   @override
   void afterFirstLayout(BuildContext context) {
     _model.setCameraPosition().then((value) {
-      _model.getParkingPlaces();
+      _model.getParkingPlaces(context);
     });
   }
 }
