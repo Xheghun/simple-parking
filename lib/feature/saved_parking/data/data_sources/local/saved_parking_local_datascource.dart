@@ -33,9 +33,16 @@ class SavedParkingPlaceLocalDataSourceImpl
     var tempPlace = place as ParkingPlaceModel;
 
     String fPlace = jsonEncode(tempPlace.toJson());
+    List<String> items = [];
 
 //retrieve current saved items
-    List<String> items = sharedPreferences.getStringList("places");
+    try {
+      if (sharedPreferences.getStringList("places").isNotEmpty) {
+        items = sharedPreferences.getStringList("places");
+      }
+    } catch (e) {
+      print(e);
+    }
 
     if (!items.contains(fPlace)) {
       items.add(fPlace);
