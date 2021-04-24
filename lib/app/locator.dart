@@ -23,7 +23,7 @@ setupLocator() async {
 
   //viewmodel
   locator
-    ..registerFactory(() => ParkingMapViewmodel(locator()))
+    ..registerFactory(() => ParkingMapViewmodel(locator(), locator()))
     ..registerFactory(() => SavedParkingViewModel(locator()))
 
     //use cases

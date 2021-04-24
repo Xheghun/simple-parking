@@ -15,7 +15,7 @@ import '../data_sources/remote/parking_place_remote_datasource.dart';
 class ParkingLocationRepositoryImpl implements ParkingLocationRepository {
   final LocationDataSource locationDataSource;
   final ParkingPlaceRemoteDataSource parkingPlaceRemoteDataSource;
-  final NetworkInfo networkInfo;
+  final NetworkInfoContract networkInfo;
 
   ParkingLocationRepositoryImpl({
     @required this.locationDataSource,
@@ -26,8 +26,10 @@ class ParkingLocationRepositoryImpl implements ParkingLocationRepository {
   @override
   Future<Location> getUserLocation() async {
     try {
-      return locationDataSource.getLocation();
-    } on LocationError {
+      return await locationDataSource.getLocation();
+    } on LocationError catch (error) {
+      print(error.type);
+      print(error.message);
       return Location(lat: 25.197525, lng: 55.274288);
     }
   }
