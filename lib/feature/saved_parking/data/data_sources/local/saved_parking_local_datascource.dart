@@ -59,9 +59,9 @@ class SavedParkingPlaceLocalDataSourceImpl
 
     items = sharedPreferences.getStringList("places");
 
-    if (items.contains(fPlace)) {
-      items.remove(fPlace);
+    if (items.remove(fPlace)) {
+      return sharedPreferences.setStringList("places", items);
     }
-    return sharedPreferences.setStringList("places", items);
+    return Future.value(false);
   }
 }

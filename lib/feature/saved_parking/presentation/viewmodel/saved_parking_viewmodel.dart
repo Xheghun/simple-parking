@@ -29,6 +29,9 @@ class SavedParkingViewModel extends BaseViewmodel {
   }
 
   void removePlace(BuildContext context, ParkingPlace place) async {
+//dismiss dialog
+    Navigator.pop(context);
+
     var result = await savedParkingUseCases.removePlace(place);
     result.fold((failure) {
       ScaffoldMessenger.of(context)

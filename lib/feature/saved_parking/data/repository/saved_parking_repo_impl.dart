@@ -31,8 +31,8 @@ class SavedParkingLocalRepositoryImpl implements SavedParkingLocalRepository {
 
   @override
   Future<Either<CacheFailure, bool>> removePlace(ParkingPlace place) async {
-    bool saved = await savedParkingLocalDataSource.savePlace(place);
-    if (saved)
+    bool deleted = await savedParkingLocalDataSource.removePlace(place);
+    if (deleted)
       return Right(true);
     else
       return Left(CacheFailure(message: "failed to delete"));
