@@ -1,6 +1,7 @@
 import 'dart:async';
 import 'dart:collection';
 
+import 'package:flutter/material.dart';
 import 'package:flutter/painting.dart';
 import 'package:flutter/widgets.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
@@ -77,11 +78,24 @@ class ParkingMapViewmodel extends BaseViewmodel {
         .animateCamera(CameraUpdate.newCameraPosition(camPosition));
   }
 
+  void savePlace(BuildContext context, ParkingPlace place) async {
+    var result = await _parkingLocationData.savePlace(place);
+
+    snackbar(String text) {
+      ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text(text)));
+    }
+
+    result.fold((cacheFailure) {
+      snackbar(cacheFailure.message);
+    }, (saved) {
+      snackbar("saved!");
+    });
+  }
+
   void showMarkerInfo(BuildContext context, ParkingPlace parkingPlace) {
     showMaterialModalBottomSheet(
         context: context,
         expand: false,
-
         builder: (ctx) {
           return ParkingInfo(
             parkingPlace: parkingPlace,
