@@ -15,15 +15,20 @@ class _MapWidgetState extends State<MapWidget>
 
   @override
   Widget build(BuildContext context) {
+    
     _model = context.watch<ParkingMapViewmodel>();
     return GoogleMap(
       myLocationEnabled: true,
+      onCameraMove: (position) {
+        _model.getParkingPlaces(position: position.target);
+      },
       mapType: MapType.normal,
       initialCameraPosition: CameraPosition(
-          target: LatLng(_model.location.lat, _model.location.lng)),
+          zoom: 15, target: LatLng(_model.location.lat, _model.location.lng)),
       onMapCreated: (GoogleMapController controller) {
         _model.controller.complete(controller);
       },
+      markers: _model.parkingMarkers,
     );
   }
 

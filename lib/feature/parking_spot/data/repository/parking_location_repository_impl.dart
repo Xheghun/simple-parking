@@ -22,7 +22,7 @@ class ParkingLocationRepositoryImpl implements ParkingLocationRepository {
     try {
       return locationDataSource.getLocation();
     } on LocationError {
-      return Location(lat: 2992.228, lng: 272.3222);
+      return Location(lat: 25.197525, lng: 55.274288);
     }
   }
 

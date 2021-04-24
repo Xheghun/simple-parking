@@ -1,32 +1,58 @@
 import 'dart:async';
+import 'dart:collection';
 
+import 'package:flutter/painting.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:simple_parking/core/failure/failure.dart';
 import 'package:simple_parking/core/viewmodel/base_viewmodel.dart';
 import 'package:simple_parking/feature/parking_spot/domain/entities/location.dart';
-import 'package:simple_parking/feature/parking_spot/domain/entities/parking_place.dart';
 import 'package:simple_parking/feature/parking_spot/domain/use_case/get_parking_data.dart';
 
 class ParkingMapViewmodel extends BaseViewmodel {
   final GetParkingLocationData _parkingLocationData;
 
   Completer<GoogleMapController> _controller = Completer();
+  Set<Marker> _parkingMarkers = HashSet<Marker>();
+  Location _location = Location(lat: 25.197525, lng: 55.274288);
 
-  Location _location = Location(lat: 27.2, lng: 22.3);
-  List<ParkingPlace> _parkingPlaces = [];
+  BitmapDescriptor customMarker;
 
-  ParkingMapViewmodel(this._parkingLocationData);
+  ParkingMapViewmodel(this._parkingLocationData) {
+    BitmapDescriptor.fromAssetImage(
+            ImageConfiguration(
+              devicePixelRatio: 2.5,
+            ),
+            'assets/images/parked-car.png')
+        .then((onValue) {
+      customMarker = onValue;
+    });
+  }
 
   Completer get controller => _controller;
   Location get location => _location;
-  List<ParkingPlace> get parkingPlaces => _parkingPlaces;
+  Set<Marker> get parkingMarkers => _parkingMarkers;
 
-  void getParkingPlaces() async {
-    var response = await _parkingLocationData.getNearbyParking(_location);
+  void getParkingPlaces({LatLng position}) async {
+    Location camLocation;
+    if (position != null)
+      camLocation = Location(lat: position.latitude, lng: position.longitude);
+
+    var response =
+        await _parkingLocationData.getNearbyParking(camLocation ?? _location);
     response.fold((failure) {
       if (failure is ServerFailure) print(failure.message);
     }, (parkingLocations) {
-      _parkingPlaces = parkingLocations;
+      parkingLocations.forEach((element) async {
+        _parkingMarkers.add(
+          Marker(
+            infoWindow: InfoWindow(
+              title: element.name,
+            ),
+            markerId: MarkerId("parking_place_${element.placeId}"),
+            position: LatLng(element.location.lat, element.location.lng),
+          ),
+        );
+      });
     });
     notifyListeners();
   }
