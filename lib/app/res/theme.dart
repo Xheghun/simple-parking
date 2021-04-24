@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:simple_parking/app/res/colors.dart';
+
+import 'colors.dart';
 
 class AppTheme {
   static ThemeData defaultTheme() {
@@ -25,12 +26,14 @@ class AppTheme {
       textTheme: TextTheme(
         headline1: GoogleFonts.poppins(
             fontSize: 20, fontWeight: FontWeight.w600, color: colorPrimary),
-        headline2:
-            GoogleFonts.poppins(fontSize: 18, color: colorPrimary, fontWeight: FontWeight.w500),
+        headline2: GoogleFonts.poppins(
+            fontSize: 18, color: colorPrimary, fontWeight: FontWeight.w500),
         bodyText1:
             GoogleFonts.poppins(fontSize: 16, fontWeight: FontWeight.w400),
         subtitle2: GoogleFonts.poppins(
             fontSize: 13, color: Colors.grey, fontWeight: FontWeight.w500),
+        button: GoogleFonts.poppins(
+            fontSize: 14, color: Colors.white, fontWeight: FontWeight.w500),
       ),
     );
   }

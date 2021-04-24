@@ -1,5 +1,6 @@
 import 'package:flutter/widgets.dart';
-import 'package:simple_parking/core/enum/view_state.dart';
+
+import '../enum/view_state.dart';
 
 class BaseViewmodel with ChangeNotifier {
   ViewState _state = ViewState.Idle;

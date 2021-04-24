@@ -1,32 +1,81 @@
 import 'dart:async';
+import 'dart:collection';
 
+import 'package:flutter/material.dart';
+import 'package:flutter/painting.dart';
+import 'package:flutter/widgets.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
-import 'package:simple_parking/core/failure/failure.dart';
-import 'package:simple_parking/core/viewmodel/base_viewmodel.dart';
-import 'package:simple_parking/feature/parking_spot/domain/entities/location.dart';
-import 'package:simple_parking/feature/parking_spot/domain/entities/parking_place.dart';
-import 'package:simple_parking/feature/parking_spot/domain/use_case/get_parking_data.dart';
+import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
+import 'package:simple_parking/app/util/helpers.dart';
+import 'package:simple_parking/core/network/network_info.dart';
+
+import '../../../../core/entities/parking_place.dart';
+import '../../../../core/failure/failure.dart';
+import '../../../../core/viewmodel/base_viewmodel.dart';
+import '../../domain/entities/location.dart';
+import '../../domain/use_case/get_parking_data.dart';
+import '../widget/parking_info.dart';
 
 class ParkingMapViewmodel extends BaseViewmodel {
   final GetParkingLocationData _parkingLocationData;
+  final NetworkInfoContract _networkInfoContract;
 
   Completer<GoogleMapController> _controller = Completer();
+  Set<Marker> _parkingMarkers = HashSet<Marker>();
+  Location _location = Location(lat: 25.197525, lng: 55.274288);
 
-  Location _location = Location(lat: 27.2, lng: 22.3);
-  List<ParkingPlace> _parkingPlaces = [];
+  BitmapDescriptor customMarker;
 
-  ParkingMapViewmodel(this._parkingLocationData);
+  ParkingMapViewmodel(this._parkingLocationData, this._networkInfoContract) {
+    BitmapDescriptor.fromAssetImage(
+            ImageConfiguration(
+              devicePixelRatio: 2.5,
+            ),
+            'assets/images/parked-car.png')
+        .then((onValue) {
+      customMarker = onValue;
+    });
+  }
 
   Completer get controller => _controller;
   Location get location => _location;
-  List<ParkingPlace> get parkingPlaces => _parkingPlaces;
+  Set<Marker> get parkingMarkers => _parkingMarkers;
+  Future<bool> get hasNetwork async =>
+      await _networkInfoContract.hasNetworkConnection();
 
-  void getParkingPlaces() async {
-    var response = await _parkingLocationData.getNearbyParking(_location);
+  void getParkingPlaces(context, {LatLng position}) async {
+    ScaffoldMessenger.of(context).hideCurrentSnackBar();
+
+    Location camLocation;
+    if (position != null)
+      camLocation = Location(lat: position.latitude, lng: position.longitude);
+
+    var response =
+        await _parkingLocationData.getNearbyParking(camLocation ?? _location);
     response.fold((failure) {
       if (failure is ServerFailure) print(failure.message);
+      if (failure is NetworkFailure)
+        snackbar(context,
+            text: failure.message,
+            duration: Duration(minutes: 10),
+            action: SnackBarAction(
+              label: 'Retry',
+              textColor: Colors.redAccent,
+              onPressed: () => getParkingPlaces(context),
+            ));
     }, (parkingLocations) {
-      _parkingPlaces = parkingLocations;
+      parkingLocations.forEach((element) async {
+        _parkingMarkers.add(
+          Marker(
+            infoWindow: InfoWindow(
+              title: element.name,
+            ),
+            onTap: () => showMarkerInfo(context, element),
+            markerId: MarkerId("parking_place_${element.placeId}"),
+            position: LatLng(element.location.lat, element.location.lng),
+          ),
+        );
+      });
     });
     notifyListeners();
   }
@@ -44,5 +93,29 @@ class ParkingMapViewmodel extends BaseViewmodel {
 
     tempMapController
         .animateCamera(CameraUpdate.newCameraPosition(camPosition));
+  }
+
+  void savePlace(BuildContext context, ParkingPlace place) async {
+//dismiss bottom sheet
+    Navigator.pop(context);
+
+    var result = await _parkingLocationData.savePlace(place);
+
+    result.fold((cacheFailure) {
+      snackbar(context, text: cacheFailure.message);
+    }, (saved) {
+      snackbar(context, text: "saved");
+    });
+  }
+
+  void showMarkerInfo(BuildContext context, ParkingPlace parkingPlace) {
+    showMaterialModalBottomSheet(
+        context: context,
+        expand: false,
+        builder: (ctx) {
+          return ParkingInfo(
+              parkingPlace: parkingPlace,
+              onButtonPressed: () => savePlace(context, parkingPlace));
+        });
   }
 }

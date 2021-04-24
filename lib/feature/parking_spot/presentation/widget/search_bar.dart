@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:simple_parking/app/res/style.dart';
+import '../../../../app/res/style.dart';
 
 class SearchBar extends StatelessWidget {
   @override

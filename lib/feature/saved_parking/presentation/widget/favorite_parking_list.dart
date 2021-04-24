@@ -1,40 +1,35 @@
-import 'dart:ui';
-
+import 'package:after_layout/after_layout.dart';
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
-import 'package:simple_parking/app/res/colors.dart';
-import 'package:simple_parking/app/res/string.dart';
-import 'package:simple_parking/app/res/style.dart';
-import 'package:simple_parking/feature/saved_parking/presentation/widget/widget.dart';
+import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
+import 'package:provider/provider.dart';
+import '../../../../app/res/colors.dart';
+import '../../../../app/res/string.dart';
+import '../../../../app/res/style.dart';
+import '../../../../core/entities/parking_place.dart';
+import '../../../parking_spot/presentation/widget/parking_info.dart';
+import '../viewmodel/saved_parking_viewmodel.dart';
+import 'widget.dart';
 
-class FavoriteParkingList extends StatelessWidget {
+class FavoriteParkingList extends StatefulWidget {
+  @override
+  _FavoriteParkingListState createState() => _FavoriteParkingListState();
+}
+
+class _FavoriteParkingListState extends State<FavoriteParkingList>
+    with AfterLayoutMixin {
+  SavedParkingViewModel _model;
   @override
   Widget build(BuildContext context) {
     ThemeData theme = Theme.of(context);
+    _model = context.watch<SavedParkingViewModel>();
 
-    Widget _distance() {
-      return Container(
-        child: Row(
-          children: [
-            Icon(
-              Icons.directions_run,
-              size: 15,
-              color: colorPrimary,
-            ),
-            Text(
-              "4 km",
-              style: theme.textTheme.subtitle2,
-            )
-          ],
-        ),
-      );
-    }
-
-    Widget _location() {
+    Widget _location({String text = "spot"}) {
       return Container(
         child: Row(
           children: [
             Text(
-              "Downtown Dubai",
+              text,
               style: theme.textTheme.subtitle2,
             ),
             SizedBox(
@@ -51,14 +46,25 @@ class FavoriteParkingList extends StatelessWidget {
     }
 
     return ListView.separated(
-      itemCount: 12,
+      itemCount: _model.parkingList.length,
       padding: EdgeInsets.symmetric(vertical: 12),
       separatorBuilder: (_, __) => Container(
         height: 6,
       ),
       itemBuilder: (context, index) {
+        ParkingPlace parkingPlace = _model.parkingList[index];
+
         return ListTile(
-          onTap: () {},
+          onTap: () {
+            showMaterialModalBottomSheet(
+                context: context,
+                builder: (context) => ParkingInfo(
+                      parkingPlace: parkingPlace,
+                      isSave: false,
+                      onButtonPressed: () =>
+                          _model.removePlace(context, parkingPlace),
+                    ));
+          },
           contentPadding: EdgeInsets.zero,
           leading: ClipRRect(
             borderRadius: AppStyle.borderRadius3,
@@ -66,16 +72,15 @@ class FavoriteParkingList extends StatelessWidget {
               height: 200,
               width: 80,
               child: Material(
-                elevation: 4,
-                child: Image.asset(
-                  "${imagePath}parking.jpg",
-                  fit: BoxFit.cover,
-                ),
-              ),
+                  elevation: 4,
+                  child: FadeInImage(
+                    placeholder: AssetImage("${imagePath}parking.jpg"),
+                    image: CachedNetworkImageProvider(parkingPlace.icon),
+                  )),
             ),
           ),
           title: Text(
-            "Dubai Mall",
+            parkingPlace.name,
             style: theme.textTheme.headline2,
           ),
           subtitle: Column(
@@ -83,18 +88,29 @@ class FavoriteParkingList extends StatelessWidget {
               SizedBox(
                 height: 3,
               ),
-              _location(),
+              _location(text: parkingPlace.vicinity),
               SizedBox(
                 height: 4,
               ),
               Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [RatingBarWidget(), _distance()],
-              ),
+                children: [
+                  RatingBarWidget(
+                    rating: parkingPlace.rating,
+                  ),
+                  Expanded(
+                    child: SizedBox(),
+                  ),
+                ],
+              )
             ],
           ),
         );
       },
     );
+  }
+
+  @override
+  void afterFirstLayout(BuildContext context) {
+    _model.getSavedParking();
   }
 }

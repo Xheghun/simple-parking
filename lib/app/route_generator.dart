@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
-import 'package:simple_parking/app/main/main_screen_holder.dart';
 
+import 'main/main_screen_holder.dart';
 import 'routes.dart';
 
 class RouteGenerator {

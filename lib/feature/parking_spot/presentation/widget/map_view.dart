@@ -1,8 +1,9 @@
+import 'package:after_layout/after_layout.dart';
 import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:provider/provider.dart';
-import 'package:after_layout/after_layout.dart';
-import 'package:simple_parking/feature/parking_spot/presentation/viewmodel/parking_map_viewmodel.dart';
+
+import '../viewmodel/parking_map_viewmodel.dart';
 
 class MapWidget extends StatefulWidget {
   @override
@@ -18,19 +19,23 @@ class _MapWidgetState extends State<MapWidget>
     _model = context.watch<ParkingMapViewmodel>();
     return GoogleMap(
       myLocationEnabled: true,
+      onCameraMove: (position) {
+        _model.getParkingPlaces(context, position: position.target);
+      },
       mapType: MapType.normal,
       initialCameraPosition: CameraPosition(
-          target: LatLng(_model.location.lat, _model.location.lng)),
+          zoom: 15, target: LatLng(_model.location.lat, _model.location.lng)),
       onMapCreated: (GoogleMapController controller) {
         _model.controller.complete(controller);
       },
+      markers: _model.parkingMarkers,
     );
   }
 
   @override
   void afterFirstLayout(BuildContext context) {
     _model.setCameraPosition().then((value) {
-      _model.getParkingPlaces();
+      _model.getParkingPlaces(context);
     });
   }
 }

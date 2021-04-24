@@ -1,8 +1,9 @@
 import 'package:dartz/dartz.dart';
 import 'package:geolocator/geolocator.dart';
-import 'package:simple_parking/feature/parking_spot/data/models/user_location_model.dart';
-import 'package:simple_parking/feature/parking_spot/domain/entities/location.dart';
-import 'package:simple_parking/feature/parking_spot/error/location_error.dart';
+
+import '../../../domain/entities/location.dart';
+import '../../../error/location_error.dart';
+import '../../models/user_location_model.dart';
 
 abstract class LocationDataSource {
   ///checks if the location service is enabled and also
