@@ -18,7 +18,7 @@ class SavedParkingLocalRepositoryImpl implements SavedParkingLocalRepository {
     if (saved)
       return Right(true);
     else
-      return Left(CacheFailure(message: "failed to save"));
+      return Left(CacheFailure("failed to save"));
   }
 
   @override
@@ -26,7 +26,7 @@ class SavedParkingLocalRepositoryImpl implements SavedParkingLocalRepository {
     try {
       return Right(await savedParkingLocalDataSource.savedParkingPlaces());
     } on CacheError {
-      return Left(CacheFailure(message: "data not found"));
+      return Left(CacheFailure("data not found"));
     }
   }
 
@@ -36,6 +36,6 @@ class SavedParkingLocalRepositoryImpl implements SavedParkingLocalRepository {
     if (deleted)
       return Right(true);
     else
-      return Left(CacheFailure(message: "failed to delete"));
+      return Left(CacheFailure("failed to delete"));
   }
 }

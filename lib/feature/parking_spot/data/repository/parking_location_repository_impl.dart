@@ -1,5 +1,7 @@
 import 'package:dartz/dartz.dart';
 import 'package:meta/meta.dart';
+import 'package:simple_parking/core/errors/codes.dart';
+import 'package:simple_parking/core/network/network_info.dart';
 
 import '../../../../core/entities/parking_place.dart';
 import '../../../../core/errors/server_error.dart';
@@ -13,10 +15,13 @@ import '../data_sources/remote/parking_place_remote_datasource.dart';
 class ParkingLocationRepositoryImpl implements ParkingLocationRepository {
   final LocationDataSource locationDataSource;
   final ParkingPlaceRemoteDataSource parkingPlaceRemoteDataSource;
+  final NetworkInfo networkInfo;
 
-  ParkingLocationRepositoryImpl(
-      {@required this.locationDataSource,
-      @required this.parkingPlaceRemoteDataSource});
+  ParkingLocationRepositoryImpl({
+    @required this.locationDataSource,
+    @required this.parkingPlaceRemoteDataSource,
+    @required this.networkInfo,
+  });
 
   @override
   Future<Location> getUserLocation() async {
@@ -30,12 +35,15 @@ class ParkingLocationRepositoryImpl implements ParkingLocationRepository {
   @override
   Future<Either<Failure, List<ParkingPlace>>> getNearbyParking(
       Location location) async {
-    try {
-      return Right(
-          await parkingPlaceRemoteDataSource.getNearbyParking(location));
-    } on ServerError {
-      return Left(ServerFailure(
-          message: "an error occurred while trying to process this request"));
+    if (await networkInfo.hasNetworkConnection()) {
+      try {
+        return Right(
+            await parkingPlaceRemoteDataSource.getNearbyParking(location));
+      } on ServerError {
+        return Left(ServerFailure(SERVER_ERROR_MESSAGE));
+      }
+    } else {
+      return Left(NetworkFailure(NETWORK_ERROR_MESSAGE));
     }
   }
 }
