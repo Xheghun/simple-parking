@@ -81,8 +81,8 @@ class _FavoriteParkingListState extends State<FavoriteParkingList>
                 builder: (context) => ParkingInfo(
                       parkingPlace: parkingPlace,
                       isSave: false,
-                      onButtonPressed:
-                          null, // _model.removePlace(parkingPlace),
+                      onButtonPressed: () =>
+                          _model.removePlace(context, parkingPlace),
                     ));
           },
           contentPadding: EdgeInsets.zero,

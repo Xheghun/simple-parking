@@ -17,7 +17,7 @@ class SavedParkingLocalRepositoryImpl implements SavedParkingLocalRepository {
     if (saved)
       return Right(true);
     else
-      return Left(CacheFailure());
+      return Left(CacheFailure(message: "failed to save"));
   }
 
   @override
@@ -27,5 +27,14 @@ class SavedParkingLocalRepositoryImpl implements SavedParkingLocalRepository {
     } on CacheError {
       return Left(CacheFailure(message: "data not found"));
     }
+  }
+
+  @override
+  Future<Either<CacheFailure, bool>> removePlace(ParkingPlace place) async {
+    bool saved = await savedParkingLocalDataSource.savePlace(place);
+    if (saved)
+      return Right(true);
+    else
+      return Left(CacheFailure(message: "failed to delete"));
   }
 }

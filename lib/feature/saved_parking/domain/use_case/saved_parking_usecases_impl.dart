@@ -16,4 +16,8 @@ class SavedParkingUseCasesImpl implements SavedParkingUseCases {
   @override
   Future<Either<CacheFailure, List<ParkingPlace>>> savedPlaces() =>
       savedParkingLocalRepository.savedParkingPlaces();
+
+  @override
+  Future<Either<CacheFailure, bool>> removePlace(ParkingPlace place) =>
+      savedParkingLocalRepository.removePlace(place);
 }

@@ -34,4 +34,9 @@ class GetParkingLocationData
   Future<Either<CacheFailure, List<ParkingPlace>>> savedPlaces() {
     throw UnimplementedError("tried to get saved places outside it's scope");
   }
+
+  @override
+  Future<Either<CacheFailure, bool>> removePlace(ParkingPlace place) {
+    throw UnimplementedError("tried deleting places outside it's scope");
+  }
 }

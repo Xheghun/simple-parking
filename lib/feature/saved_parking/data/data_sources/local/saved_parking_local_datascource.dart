@@ -6,8 +6,9 @@ import 'package:simple_parking/core/errors/cache_error.dart';
 import 'package:simple_parking/feature/parking_spot/data/models/parking_place_model.dart';
 
 abstract class SavedParkingLocalDataSource {
-  Future<bool> savePlace(ParkingPlace place);
+  Future<bool> savePlace(ParkingPlaceModel place);
   Future<List<ParkingPlace>> savedParkingPlaces();
+  Future<bool> removePlace(ParkingPlaceModel place);
 }
 
 class SavedParkingPlaceLocalDataSourceImpl
@@ -31,10 +32,8 @@ class SavedParkingPlaceLocalDataSourceImpl
   }
 
   @override
-  Future<bool> savePlace(ParkingPlace place) {
-    var tempPlace = place as ParkingPlaceModel;
-
-    String fPlace = jsonEncode(tempPlace.toJson());
+  Future<bool> savePlace(ParkingPlaceModel place) {
+    String fPlace = jsonEncode(place.toJson());
     List<String> items = [];
 
 //retrieve current saved items
@@ -50,6 +49,19 @@ class SavedParkingPlaceLocalDataSourceImpl
       items.add(fPlace);
     }
 
+    return sharedPreferences.setStringList("places", items);
+  }
+
+  @override
+  Future<bool> removePlace(ParkingPlaceModel place) {
+    List<String> items = [];
+    String fPlace = jsonEncode(place.toJson());
+
+    items = sharedPreferences.getStringList("places");
+
+    if (items.contains(fPlace)) {
+      items.remove(fPlace);
+    }
     return sharedPreferences.setStringList("places", items);
   }
 }
