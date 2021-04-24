@@ -1,11 +1,12 @@
-import 'package:simple_parking/core/failure/failure.dart';
 import 'package:dartz/dartz.dart';
-import 'package:simple_parking/feature/parking_spot/domain/entities/location.dart';
-import 'package:simple_parking/core/entities/parking_place.dart';
-import 'package:simple_parking/feature/parking_spot/domain/repositories/parking_location_repository.dart';
-import 'package:simple_parking/feature/saved_parking/domain/repositories/saved_parking_repo.dart';
-import 'package:simple_parking/feature/saved_parking/domain/use_case/saved_parking_usecases_impl.dart';
 import 'package:meta/meta.dart';
+
+import '../../../../core/entities/parking_place.dart';
+import '../../../../core/failure/failure.dart';
+import '../../../saved_parking/domain/repositories/saved_parking_repo.dart';
+import '../../../saved_parking/domain/use_case/saved_parking_usecases_impl.dart';
+import '../entities/location.dart';
+import '../repositories/parking_location_repository.dart';
 import 'parking_location_data.dart';
 
 class GetParkingLocationData

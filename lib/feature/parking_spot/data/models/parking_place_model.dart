@@ -1,6 +1,4 @@
-import 'package:simple_parking/feature/parking_spot/domain/entities/location.dart';
-import 'package:simple_parking/core/entities/parking_place.dart';
-
+import '../../../../core/entities/parking_place.dart';
 import 'location_model.dart';
 
 class ParkingPlaceModel extends ParkingPlace {

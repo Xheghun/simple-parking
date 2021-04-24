@@ -1,9 +1,10 @@
 import 'package:dartz/dartz.dart';
-import 'package:simple_parking/core/entities/parking_place.dart';
-import 'package:simple_parking/core/failure/failure.dart';
-import 'package:simple_parking/feature/saved_parking/domain/repositories/saved_parking_repo.dart';
-import 'package:simple_parking/feature/saved_parking/domain/use_case/saved_parking_usecases.dart';
 import 'package:meta/meta.dart';
+
+import '../../../../core/entities/parking_place.dart';
+import '../../../../core/failure/failure.dart';
+import '../repositories/saved_parking_repo.dart';
+import 'saved_parking_usecases.dart';
 
 class SavedParkingUseCasesImpl implements SavedParkingUseCases {
   final SavedParkingLocalRepository savedParkingLocalRepository;

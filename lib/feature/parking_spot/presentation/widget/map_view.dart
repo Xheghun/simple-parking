@@ -1,8 +1,9 @@
+import 'package:after_layout/after_layout.dart';
 import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:provider/provider.dart';
-import 'package:after_layout/after_layout.dart';
-import 'package:simple_parking/feature/parking_spot/presentation/viewmodel/parking_map_viewmodel.dart';
+
+import '../viewmodel/parking_map_viewmodel.dart';
 
 class MapWidget extends StatefulWidget {
   @override

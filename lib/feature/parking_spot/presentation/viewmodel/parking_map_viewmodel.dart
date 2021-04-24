@@ -6,12 +6,13 @@ import 'package:flutter/painting.dart';
 import 'package:flutter/widgets.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
-import 'package:simple_parking/core/failure/failure.dart';
-import 'package:simple_parking/core/viewmodel/base_viewmodel.dart';
-import 'package:simple_parking/feature/parking_spot/domain/entities/location.dart';
-import 'package:simple_parking/core/entities/parking_place.dart';
-import 'package:simple_parking/feature/parking_spot/domain/use_case/get_parking_data.dart';
-import 'package:simple_parking/feature/parking_spot/presentation/widget/parking_info.dart';
+
+import '../../../../core/entities/parking_place.dart';
+import '../../../../core/failure/failure.dart';
+import '../../../../core/viewmodel/base_viewmodel.dart';
+import '../../domain/entities/location.dart';
+import '../../domain/use_case/get_parking_data.dart';
+import '../widget/parking_info.dart';
 
 class ParkingMapViewmodel extends BaseViewmodel {
   final GetParkingLocationData _parkingLocationData;

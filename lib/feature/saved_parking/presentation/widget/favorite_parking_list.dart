@@ -1,17 +1,15 @@
-import 'dart:ui';
-
 import 'package:after_layout/after_layout.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
 import 'package:provider/provider.dart';
-import 'package:simple_parking/app/res/colors.dart';
-import 'package:simple_parking/app/res/string.dart';
-import 'package:simple_parking/app/res/style.dart';
-import 'package:simple_parking/core/entities/parking_place.dart';
-import 'package:simple_parking/feature/parking_spot/presentation/widget/parking_info.dart';
-import 'package:simple_parking/feature/saved_parking/presentation/viewmodel/saved_parking_viewmodel.dart';
-import 'package:simple_parking/feature/saved_parking/presentation/widget/widget.dart';
+import '../../../../app/res/colors.dart';
+import '../../../../app/res/string.dart';
+import '../../../../app/res/style.dart';
+import '../../../../core/entities/parking_place.dart';
+import '../../../parking_spot/presentation/widget/parking_info.dart';
+import '../viewmodel/saved_parking_viewmodel.dart';
+import 'widget.dart';
 
 class FavoriteParkingList extends StatefulWidget {
   @override
@@ -25,24 +23,6 @@ class _FavoriteParkingListState extends State<FavoriteParkingList>
   Widget build(BuildContext context) {
     ThemeData theme = Theme.of(context);
     _model = context.watch<SavedParkingViewModel>();
-
-    Widget _distance() {
-      return Container(
-        child: Row(
-          children: [
-            Icon(
-              Icons.directions_run,
-              size: 15,
-              color: colorPrimary,
-            ),
-            Text(
-              "4 km",
-              style: theme.textTheme.subtitle2,
-            )
-          ],
-        ),
-      );
-    }
 
     Widget _location({String text = "spot"}) {
       return Container(

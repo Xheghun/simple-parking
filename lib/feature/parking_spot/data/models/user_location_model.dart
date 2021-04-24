@@ -1,4 +1,4 @@
-import 'package:simple_parking/feature/parking_spot/domain/entities/location.dart';
+import '../../domain/entities/location.dart';
 import 'package:meta/meta.dart';
 
 class LocationModel extends Location {

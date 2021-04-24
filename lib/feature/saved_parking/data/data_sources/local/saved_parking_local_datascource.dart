@@ -1,9 +1,11 @@
 import 'dart:convert';
-import 'package:shared_preferences/shared_preferences.dart';
-import 'package:simple_parking/core/entities/parking_place.dart';
+
 import 'package:meta/meta.dart';
-import 'package:simple_parking/core/errors/cache_error.dart';
-import 'package:simple_parking/feature/parking_spot/data/models/parking_place_model.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+
+import '../../../../../core/entities/parking_place.dart';
+import '../../../../../core/errors/cache_error.dart';
+import '../../../../parking_spot/data/models/parking_place_model.dart';
 
 abstract class SavedParkingLocalDataSource {
   Future<bool> savePlace(ParkingPlaceModel place);

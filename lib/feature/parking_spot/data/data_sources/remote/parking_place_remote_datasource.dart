@@ -1,11 +1,11 @@
 import 'package:dio/dio.dart';
-import 'package:simple_parking/core/errors/server_error.dart';
-import 'package:simple_parking/feature/parking_spot/data/models/parking_place_model.dart';
-import 'package:simple_parking/feature/parking_spot/domain/entities/location.dart';
-import 'package:simple_parking/core/entities/parking_place.dart';
-
 import 'package:meta/meta.dart';
-import 'package:simple_parking/keys.dart';
+
+import '../../../../../core/entities/parking_place.dart';
+import '../../../../../core/errors/server_error.dart';
+import '../../../../../keys.dart';
+import '../../../domain/entities/location.dart';
+import '../../models/parking_place_model.dart';
 
 abstract class ParkingPlaceRemoteDataSource {
   ///get a list of nearby parking from the google places api

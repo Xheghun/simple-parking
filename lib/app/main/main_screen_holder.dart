@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:simple_parking/app/main/main_screen_viemodel.dart';
-import 'package:simple_parking/app/res/colors.dart';
+
+import '../res/colors.dart';
+import 'main_screen_viemodel.dart';
 
 class MainScreen extends StatelessWidget {
   static const routeName = "/mainScreen";

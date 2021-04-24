@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:simple_parking/app/res/colors.dart';
+
+import 'colors.dart';
 
 class AppTheme {
   static ThemeData defaultTheme() {

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:rating_bar/rating_bar.dart';
-import 'package:simple_parking/app/res/colors.dart';
+import '../../../../app/res/colors.dart';
 
 class RatingBarWidget extends StatelessWidget {
   final num rating;

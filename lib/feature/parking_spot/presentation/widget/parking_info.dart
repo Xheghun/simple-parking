@@ -1,11 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:simple_parking/app/locator.dart';
-import 'package:simple_parking/app/res/colors.dart';
-import 'package:simple_parking/app/res/style.dart';
-import 'package:simple_parking/core/entities/parking_place.dart';
-import 'package:provider/provider.dart';
-import 'package:simple_parking/feature/parking_spot/presentation/viewmodel/parking_map_viewmodel.dart';
-import 'package:simple_parking/feature/saved_parking/presentation/widget/rating_bar.dart';
+
+import '../../../../app/res/colors.dart';
+import '../../../../app/res/style.dart';
+import '../../../../core/entities/parking_place.dart';
+import '../../../saved_parking/presentation/widget/rating_bar.dart';
 
 class ParkingInfo extends StatelessWidget {
   final ParkingPlace parkingPlace;

@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:simple_parking/app/locator.dart';
-import 'package:simple_parking/feature/parking_spot/domain/use_case/get_parking_data.dart';
-import 'package:simple_parking/feature/parking_spot/presentation/viewmodel/parking_map_viewmodel.dart';
+
+import '../../../../app/locator.dart';
+import '../../domain/use_case/get_parking_data.dart';
+import '../viewmodel/parking_map_viewmodel.dart';
 import '../widget/widget.dart';
 
 class ParkingSpots extends StatelessWidget {

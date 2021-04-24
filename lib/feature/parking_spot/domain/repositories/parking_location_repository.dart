@@ -1,7 +1,8 @@
-import 'package:simple_parking/core/failure/failure.dart';
-import 'package:simple_parking/feature/parking_spot/domain/entities/location.dart';
 import 'package:dartz/dartz.dart';
-import 'package:simple_parking/core/entities/parking_place.dart';
+
+import '../../../../core/entities/parking_place.dart';
+import '../../../../core/failure/failure.dart';
+import '../entities/location.dart';
 
 abstract class ParkingLocationRepository {
   Future<Location> getUserLocation();

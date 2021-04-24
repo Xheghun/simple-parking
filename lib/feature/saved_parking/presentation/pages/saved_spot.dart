@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:simple_parking/app/locator.dart';
-import 'package:simple_parking/feature/saved_parking/presentation/viewmodel/saved_parking_viewmodel.dart';
+
+import '../../../../app/locator.dart';
+import '../viewmodel/saved_parking_viewmodel.dart';
 import '../widget/widget.dart';
 
 class SavedSpots extends StatelessWidget {

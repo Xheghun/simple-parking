@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
-import 'package:simple_parking/app/routes.dart';
-import 'package:simple_parking/core/viewmodel/base_viewmodel.dart';
+
+import '../../core/viewmodel/base_viewmodel.dart';
+import '../routes.dart';
 
 class MainScreenViewModel extends BaseViewmodel {
   int _currentItem = 0;
