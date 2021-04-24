@@ -8,11 +8,9 @@ class SavedParkingUseCasesImpl implements SavedParkingUseCases {
   SavedParkingLocalRepository savedParkingLocalRepository;
   @override
   Future<Either<CacheFailure, bool>> savePlace(ParkingPlace place) =>
-    savedParkingLocalRepository.savePlace(place);
-  
+      savedParkingLocalRepository.savePlace(place);
 
   @override
   Future<Either<CacheFailure, List<ParkingPlace>>> savedPlaces() =>
-    savedParkingLocalRepository.savedParkingPlaces();
-  
+      savedParkingLocalRepository.savedParkingPlaces();
 }
