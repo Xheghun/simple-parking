@@ -1,10 +1,11 @@
 import 'package:simple_parking/feature/parking_spot/domain/entities/suggestion.dart';
 
 class SuggestionModel extends Suggestion {
+  
   SuggestionModel({
-    String description,
-    String placeId,
-    String reference,
+    final String description,
+    final String placeId,
+    final String reference,
   }) : super(
           description: description,
           placeId: placeId,

@@ -35,8 +35,8 @@ class SearchSuggestionViewmodel extends BaseViewmodel {
       if (failure is NetworkFailure) {
         snackbar(context, text: failure.message);
       }
-    }, (suggestions) {
-      _suggestions.forEach((element) {
+    }, (suggestionList) {
+      suggestionList.forEach((element) {
         if (!_suggestions.contains(element)) {
           _suggestions.add(element);
         }

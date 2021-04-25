@@ -10,7 +10,6 @@ class SearchPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    var mediaQuery = MediaQuery.of(context);
     var theme = Theme.of(context);
 
     Widget _body(SearchSuggestionViewmodel model) {
@@ -51,7 +50,7 @@ class SearchPage extends StatelessWidget {
                 title: SearchBar(
                   controller: model.controller,
                   textInputAction: TextInputAction.go,
-                  onSubmit: () => model.validateInput(context),
+                  onSubmit: (_) => model.validateInput(context),
                   prefixIcon: IconButton(
                     icon: Icon(Icons.arrow_back),
                     onPressed: () => Navigator.pop(context),
@@ -59,7 +58,10 @@ class SearchPage extends StatelessWidget {
                   margin: EdgeInsets.zero,
                   hintText: "Enter city name",
                 )),
-            body: _body(model),
+            body: Container(
+                padding: EdgeInsets.symmetric(
+                    horizontal: MediaQuery.of(context).size.width * 0.05),
+                child: _body(model)),
           );
         },
       ),
