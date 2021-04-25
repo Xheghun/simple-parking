@@ -1,13 +1,15 @@
-class SuggestionModel {
-  SuggestionModel({
-    this.description,
-    this.placeId,
-    this.reference,
-  });
+import 'package:simple_parking/feature/parking_spot/domain/entities/suggestion.dart';
 
-  String description;
-  String placeId;
-  String reference;
+class SuggestionModel extends Suggestion {
+  SuggestionModel({
+    String description,
+    String placeId,
+    String reference,
+  }) : super(
+          description: description,
+          placeId: placeId,
+          reference: reference,
+        );
 
   factory SuggestionModel.fromJson(Map<String, dynamic> json) =>
       SuggestionModel(
