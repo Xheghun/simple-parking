@@ -2,6 +2,7 @@ import 'package:simple_parking/core/errors/codes.dart';
 import 'package:simple_parking/core/errors/server_error.dart';
 import 'package:simple_parking/core/network/network_info.dart';
 import 'package:simple_parking/feature/parking_spot/data/data_sources/remote/search_place_remote_datasource.dart';
+import 'package:simple_parking/feature/parking_spot/domain/entities/location.dart';
 import 'package:simple_parking/feature/parking_spot/domain/entities/suggestion.dart';
 import 'package:simple_parking/core/failure/failure.dart';
 import 'package:dartz/dartz.dart';
@@ -22,6 +23,20 @@ class SearchSuggestionRepositoryImpl implements SearchSuggestionRepository {
     if (await networkInfoContract.hasNetworkConnection()) {
       try {
         return Right(await searchPlaceRemoteDataSource.citySuggestions(input));
+      } on ServerError {
+        return Left(ServerFailure(SERVER_ERROR_MESSAGE));
+      }
+    } else {
+      return Left(NetworkFailure(NETWORK_ERROR_MESSAGE));
+    }
+  }
+
+  @override
+  Future<Either<Failure, Location>> getPlaceLocation(String placeId) async {
+    if (await networkInfoContract.hasNetworkConnection()) {
+      try {
+        return Right(
+            await searchPlaceRemoteDataSource.getPlaceLocation(placeId));
       } on ServerError {
         return Left(ServerFailure(SERVER_ERROR_MESSAGE));
       }
