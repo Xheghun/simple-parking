@@ -8,7 +8,7 @@ import '../feature/parking_spot/data/data_sources/local/location_datasoucre.dart
 import '../feature/parking_spot/data/data_sources/remote/parking_place_remote_datasource.dart';
 import '../feature/parking_spot/data/repository/parking_location_repository_impl.dart';
 import '../feature/parking_spot/domain/repositories/parking_location_repository.dart';
-import '../feature/parking_spot/domain/use_case/get_parking_data.dart';
+import '../feature/parking_spot/domain/use_case/get_parking_data_use_case_impl.dart';
 import '../feature/parking_spot/presentation/viewmodel/parking_map_viewmodel.dart';
 import '../feature/saved_parking/data/data_sources/local/saved_parking_local_datascource.dart';
 import '../feature/saved_parking/data/repository/saved_parking_repo_impl.dart';

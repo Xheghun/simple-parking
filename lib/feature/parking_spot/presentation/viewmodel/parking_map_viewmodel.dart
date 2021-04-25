@@ -13,7 +13,7 @@ import '../../../../core/entities/parking_place.dart';
 import '../../../../core/failure/failure.dart';
 import '../../../../core/viewmodel/base_viewmodel.dart';
 import '../../domain/entities/location.dart';
-import '../../domain/use_case/get_parking_data.dart';
+import '../../domain/use_case/get_parking_data_use_case_impl.dart';
 import '../widget/parking_info.dart';
 
 class ParkingMapViewmodel extends BaseViewmodel {
