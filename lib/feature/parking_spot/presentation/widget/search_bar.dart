@@ -7,10 +7,16 @@ class SearchBar extends StatelessWidget {
   final EdgeInsets margin;
   final Widget prefixIcon;
   final String hintText;
+  final TextInputAction textInputAction;
+  final Function onSubmit;
+  final TextEditingController controller;
 
   const SearchBar(
       {Key key,
       this.prefixIcon,
+      this.onSubmit,
+      this.controller,
+      this.textInputAction,
       this.hintText = "Search location...",
       this.margin,
       this.readOnly = false,
@@ -33,12 +39,15 @@ class SearchBar extends StatelessWidget {
           padding: const EdgeInsets.symmetric(horizontal: 15),
           child: TextField(
             onTap: onTap,
+            controller: controller,
+            textInputAction: textInputAction,
+            onSubmitted: onSubmit,
             readOnly: readOnly,
             textAlignVertical: TextAlignVertical.center,
             decoration: InputDecoration(
                 border: InputBorder.none,
                 prefixIcon: prefixIcon ?? Icon(Icons.search),
-                hintText:  hintText,
+                hintText: hintText,
                 hintStyle: theme.textTheme.subtitle2),
           ),
         ),
