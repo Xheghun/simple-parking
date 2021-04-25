@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:simple_parking/app/util/helpers.dart';
 import 'package:simple_parking/core/errors/codes.dart';
+import 'package:simple_parking/feature/parking_spot/presentation/pages/search_page.dart';
 
 import '../../../../app/locator.dart';
 import '../viewmodel/parking_map_viewmodel.dart';
@@ -28,7 +29,7 @@ class ParkingSpots extends StatelessWidget {
               child: Stack(
                 children: [
                   MapWidget(),
-                  SearchBar(),
+                  SearchBar(onTap: () => Navigator.pushNamed(context, SearchPage.routeName))
                 ],
               ),
             ),

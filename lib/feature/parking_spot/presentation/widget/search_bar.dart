@@ -2,6 +2,9 @@ import 'package:flutter/material.dart';
 import '../../../../app/res/style.dart';
 
 class SearchBar extends StatelessWidget {
+  final Function onTap;
+
+  const SearchBar({Key key, this.onTap}) : super(key: key);
   @override
   Widget build(BuildContext context) {
     MediaQueryData mediaQuery = MediaQuery.of(context);
@@ -17,6 +20,7 @@ class SearchBar extends StatelessWidget {
         child: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 15),
           child: TextField(
+            onTap: onTap,
             readOnly: true,
             textAlignVertical: TextAlignVertical.center,
             decoration: InputDecoration(
