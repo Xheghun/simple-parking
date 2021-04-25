@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:simple_parking/app/res/colors.dart';
 
 class EmptyState extends StatelessWidget {
   final String text;

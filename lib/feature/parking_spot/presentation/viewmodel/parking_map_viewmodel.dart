@@ -24,18 +24,14 @@ class ParkingMapViewmodel extends BaseViewmodel {
   Set<Marker> _parkingMarkers = HashSet<Marker>();
   Location _location = Location(lat: 25.197525, lng: 55.274288);
 
-  BitmapDescriptor customMarker;
+  var customMarker = BitmapDescriptor.fromAssetImage(
+    ImageConfiguration(
+      devicePixelRatio: 2.5,
+    ),
+    'assets/images/parked_car.jpg',
+  );
 
-  ParkingMapViewmodel(this._parkingLocationData, this._networkInfoContract) {
-    BitmapDescriptor.fromAssetImage(
-            ImageConfiguration(
-              devicePixelRatio: 2.5,
-            ),
-            'assets/images/parked-car.png')
-        .then((onValue) {
-      customMarker = onValue;
-    });
-  }
+  ParkingMapViewmodel(this._parkingLocationData, this._networkInfoContract);
 
   Completer get controller => _controller;
   Location get location => _location;
@@ -67,6 +63,7 @@ class ParkingMapViewmodel extends BaseViewmodel {
       parkingLocations.forEach((element) async {
         _parkingMarkers.add(
           Marker(
+            icon: await customMarker,
             infoWindow: InfoWindow(
               title: element.name,
             ),
