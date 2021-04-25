@@ -29,7 +29,10 @@ class ParkingSpots extends StatelessWidget {
               child: Stack(
                 children: [
                   MapWidget(),
-                  SearchBar(onTap: () => Navigator.pushNamed(context, SearchPage.routeName))
+                  SearchBar(
+                      readOnly: true,
+                      onTap: () =>
+                          Navigator.pushNamed(context, SearchPage.routeName))
                 ],
               ),
             ),
