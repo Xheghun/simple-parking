@@ -4,6 +4,7 @@ import 'package:simple_parking/core/enum/view_state.dart';
 import 'package:simple_parking/core/failure/failure.dart';
 import 'package:simple_parking/core/models/input_validatior.dart';
 import 'package:simple_parking/core/viewmodel/base_viewmodel.dart';
+import 'package:simple_parking/feature/parking_spot/domain/entities/location.dart';
 import 'package:simple_parking/feature/parking_spot/domain/entities/suggestion.dart';
 import 'package:simple_parking/feature/parking_spot/domain/use_case/search_suggestion_use_cases.dart';
 
@@ -23,6 +24,18 @@ class SearchSuggestionViewmodel extends BaseViewmodel {
     if (inputValidator.notEmpty(controller.text)) {
       _getSuggestions(context);
     }
+  }
+
+  Future<Location> getPlaceLocation(
+      BuildContext context, String placeId) async {
+    var result = await searchSuggestionUseCaseImpl.getPlaceLocation(placeId);
+    Location location;
+    result.fold((failure) {
+      if (failure is NetworkFailure) snackbar(context, text: failure.message);
+    }, (loc) {
+      location = loc;
+    });
+    return location;
   }
 
   void _getSuggestions(BuildContext context) async {

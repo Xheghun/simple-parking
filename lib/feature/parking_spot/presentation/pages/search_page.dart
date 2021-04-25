@@ -13,6 +13,10 @@ class SearchPage extends StatelessWidget {
     var theme = Theme.of(context);
 
     Widget _body(SearchSuggestionViewmodel model) {
+      void getLocation(String placeId) {
+        Navigator.pop(context, model.getPlaceLocation(context, placeId));
+      }
+
       if (model.isBusy()) {
         return Center(
           child: CircularProgressIndicator(),
@@ -31,6 +35,7 @@ class SearchPage extends StatelessWidget {
           itemBuilder: (context, index) {
             Suggestion suggestion = model.suggestions[index];
             return ListTile(
+              onTap: () => getLocation(suggestion.placeId),
               contentPadding: EdgeInsets.zero,
               leading: Icon(Icons.location_on),
               title: Text(suggestion.description),
