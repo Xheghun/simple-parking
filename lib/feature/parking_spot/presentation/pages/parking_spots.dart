@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:provider/provider.dart';
 import 'package:simple_parking/app/util/helpers.dart';
 import 'package:simple_parking/core/errors/codes.dart';
+import 'package:simple_parking/feature/parking_spot/domain/entities/location.dart';
 import 'package:simple_parking/feature/parking_spot/presentation/pages/search_page.dart';
 
 import '../../../../app/locator.dart';
@@ -30,9 +32,17 @@ class ParkingSpots extends StatelessWidget {
                 children: [
                   MapWidget(),
                   SearchBar(
-                      readOnly: true,
-                      onTap: () =>
-                          Navigator.pushNamed(context, SearchPage.routeName))
+                    readOnly: true,
+                    onTap: () async {
+                      var result = await Navigator.pushNamed(
+                          context, SearchPage.routeName);
+
+                      if (result is Location) {
+                        model.setCameraPosition(
+                            loc: LatLng(result.lat, result.lng));
+                      }
+                    },
+                  )
                 ],
               ),
             ),

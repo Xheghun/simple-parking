@@ -80,16 +80,19 @@ class ParkingMapViewmodel extends BaseViewmodel {
     notifyListeners();
   }
 
-  Future setCameraPosition() async {
-    _location = await _parkingLocationData.getUserPosition();
+  Future setCameraPosition({LatLng loc}) async {
+    LatLng tempLocation;
+    if (loc == null) {
+      _location = await _parkingLocationData.getUserPosition();
+      tempLocation = LatLng(location.lat, location.lng);
+    } else {
+      tempLocation = loc;
+    }
     notifyListeners();
     GoogleMapController tempMapController = await _controller.future;
 
-    var camPosition = CameraPosition(
-        zoom: 15,
-        bearing: 30,
-        tilt: 80,
-        target: LatLng(location.lat, location.lng));
+    var camPosition =
+        CameraPosition(zoom: 16, bearing: 30, tilt: 80, target: tempLocation);
 
     tempMapController
         .animateCamera(CameraUpdate.newCameraPosition(camPosition));

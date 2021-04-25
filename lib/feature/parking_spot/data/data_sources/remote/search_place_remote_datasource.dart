@@ -55,7 +55,8 @@ class SearPlaceRemoteDataSourceImpl implements SearchPlaceRemoteDataSource {
       var response = await client.get(baseUrl, queryParameters: queryParams);
       print(response.data);
       if (response.statusCode == 200) {
-        return LocationModel.fromJson(response.data["result"]["location"]);
+        return LocationModel.fromJson(
+            response.data["result"]["geometry"]["location"]);
       }
     } on DioError catch (error) {
       print(error);
