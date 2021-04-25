@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:simple_parking/app/locator.dart';
+import 'package:simple_parking/app/widget/empty_list.dart';
 import 'package:simple_parking/feature/parking_spot/domain/entities/suggestion.dart';
 import 'package:simple_parking/feature/parking_spot/presentation/viewmodel/search_suggestion_viewmodel.dart';
 import 'package:simple_parking/feature/parking_spot/presentation/widget/widget.dart';
@@ -23,12 +24,7 @@ class SearchPage extends StatelessWidget {
         );
       } else {
         if (model.suggestions.isEmpty) {
-          return Center(
-            child: Text(
-              "results will appear here",
-              style: theme.textTheme.bodyText2,
-            ),
-          );
+          return Center(child: EmptyState(text: "results will appear here"));
         }
         return ListView.builder(
           itemCount: model.suggestions.length,

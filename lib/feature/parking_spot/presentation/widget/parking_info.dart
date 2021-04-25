@@ -54,6 +54,11 @@ class ParkingInfo extends StatelessWidget {
             ),
           ),
           Text(
+            parkingPlace.vicinity,
+            style: theme.textTheme.bodyText1,
+          ),
+          SizedBox(height: 8,),
+          Text(
             "Location: ${parkingPlace.location.lat} ${parkingPlace.location.lng}",
             style: theme.textTheme.bodyText1,
           ),
