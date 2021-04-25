@@ -1,7 +1,7 @@
 import '../../domain/entities/location.dart';
 
 class LocationModel extends Location {
-  LocationModel(double lat, double lng) : super(lat: lat, lng: lng);
+  LocationModel(final double lat, final double lng) : super(lat: lat, lng: lng);
 
   factory LocationModel.fromJson(Map<String, dynamic> data) {
     return LocationModel(data["lat"], data["lng"]);

@@ -1,9 +1,9 @@
 import 'package:dartz/dartz.dart';
 import 'package:geolocator/geolocator.dart';
+import 'package:simple_parking/feature/parking_spot/data/models/location_model.dart';
 
 import '../../../domain/entities/location.dart';
 import '../../../error/location_error.dart';
-import '../../models/user_location_model.dart';
 
 abstract class LocationDataSource {
   ///checks if the location service is enabled and also
@@ -59,7 +59,7 @@ class LocationDataSourceImpl implements LocationDataSource {
         "lng": position.longitude,
       };
 
-      return LocationModel.parseLocation(parsedPosition);
+      return LocationModel.fromJson(parsedPosition);
     });
   }
 }

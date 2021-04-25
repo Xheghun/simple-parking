@@ -23,14 +23,14 @@ class SavedParkingPlaceLocalDataSourceImpl
   Future<List<ParkingPlace>> savedParkingPlaces() async {
     try {
       List<String> items = sharedPreferences.getStringList("places");
-
-      return items
-          .map((e) => ParkingPlaceModel.fromJson(jsonDecode(e)))
-          .toList();
+      if (items != null)
+        return items
+            .map((e) => ParkingPlaceModel.fromJson(jsonDecode(e)))
+            .toList();
     } catch (e) {
       print(e);
-      throw CacheError();
     }
+    throw CacheError();
   }
 
   @override

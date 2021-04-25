@@ -3,6 +3,7 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
 import 'package:provider/provider.dart';
+import 'package:simple_parking/app/widget/empty_list.dart';
 import '../../../../app/res/colors.dart';
 import '../../../../app/res/string.dart';
 import '../../../../app/res/style.dart';
@@ -45,68 +46,73 @@ class _FavoriteParkingListState extends State<FavoriteParkingList>
       );
     }
 
-    return ListView.separated(
-      itemCount: _model.parkingList.length,
-      padding: EdgeInsets.symmetric(vertical: 12),
-      separatorBuilder: (_, __) => Container(
-        height: 6,
-      ),
-      itemBuilder: (context, index) {
-        ParkingPlace parkingPlace = _model.parkingList[index];
-
-        return ListTile(
-          onTap: () {
-            showMaterialModalBottomSheet(
-                context: context,
-                builder: (context) => ParkingInfo(
-                      parkingPlace: parkingPlace,
-                      isSave: false,
-                      onButtonPressed: () =>
-                          _model.removePlace(context, parkingPlace),
-                    ));
-          },
-          contentPadding: EdgeInsets.zero,
-          leading: ClipRRect(
-            borderRadius: AppStyle.borderRadius3,
-            child: Container(
-              height: 200,
-              width: 80,
-              child: Material(
-                  elevation: 4,
-                  child: FadeInImage(
-                    placeholder: AssetImage("${imagePath}parking.jpg"),
-                    image: CachedNetworkImageProvider(parkingPlace.icon),
-                  )),
+    return (_model.parkingList.isEmpty)
+        ? Center(
+            child: EmptyState(
+            text: "no data",
+          ))
+        : ListView.separated(
+            itemCount: _model.parkingList.length,
+            padding: EdgeInsets.symmetric(vertical: 12),
+            separatorBuilder: (_, __) => Container(
+              height: 6,
             ),
-          ),
-          title: Text(
-            parkingPlace.name,
-            style: theme.textTheme.headline2,
-          ),
-          subtitle: Column(
-            children: [
-              SizedBox(
-                height: 3,
-              ),
-              _location(text: parkingPlace.vicinity),
-              SizedBox(
-                height: 4,
-              ),
-              Row(
-                children: [
-                  RatingBarWidget(
-                    rating: parkingPlace.rating,
+            itemBuilder: (context, index) {
+              ParkingPlace parkingPlace = _model.parkingList[index];
+
+              return ListTile(
+                onTap: () {
+                  showMaterialModalBottomSheet(
+                      context: context,
+                      builder: (context) => ParkingInfo(
+                            parkingPlace: parkingPlace,
+                            isSave: false,
+                            onButtonPressed: () =>
+                                _model.removePlace(context, parkingPlace),
+                          ));
+                },
+                contentPadding: EdgeInsets.zero,
+                leading: ClipRRect(
+                  borderRadius: AppStyle.borderRadius3,
+                  child: Container(
+                    height: 200,
+                    width: 80,
+                    child: Material(
+                        elevation: 4,
+                        child: FadeInImage(
+                          placeholder: AssetImage("${imagePath}parking.jpg"),
+                          image: CachedNetworkImageProvider(parkingPlace.icon),
+                        )),
                   ),
-                  Expanded(
-                    child: SizedBox(),
-                  ),
-                ],
-              )
-            ],
-          ),
-        );
-      },
-    );
+                ),
+                title: Text(
+                  parkingPlace.name,
+                  style: theme.textTheme.headline2,
+                ),
+                subtitle: Column(
+                  children: [
+                    SizedBox(
+                      height: 3,
+                    ),
+                    _location(text: parkingPlace.vicinity),
+                    SizedBox(
+                      height: 4,
+                    ),
+                    Row(
+                      children: [
+                        RatingBarWidget(
+                          rating: parkingPlace.rating,
+                        ),
+                        Expanded(
+                          child: SizedBox(),
+                        ),
+                      ],
+                    )
+                  ],
+                ),
+              );
+            },
+          );
   }
 
   @override

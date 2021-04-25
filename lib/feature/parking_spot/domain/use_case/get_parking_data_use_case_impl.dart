@@ -7,7 +7,7 @@ import '../../../saved_parking/domain/repositories/saved_parking_repo.dart';
 import '../../../saved_parking/domain/use_case/saved_parking_usecases_impl.dart';
 import '../entities/location.dart';
 import '../repositories/parking_location_repository.dart';
-import 'parking_location_data.dart';
+import 'parking_location_data_use_case.dart';
 
 class GetParkingLocationData
     implements ParkingLocationData, SavedParkingUseCasesImpl {
