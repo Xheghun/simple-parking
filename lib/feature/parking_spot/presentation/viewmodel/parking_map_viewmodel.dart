@@ -51,14 +51,11 @@ class ParkingMapViewmodel extends BaseViewmodel {
     response.fold((failure) {
       if (failure is ServerFailure) print(failure.message);
       if (failure is NetworkFailure)
-        snackbar(context,
-            text: failure.message,
-            duration: Duration(minutes: 10),
-            action: SnackBarAction(
-              label: 'Retry',
-              textColor: Colors.redAccent,
-              onPressed: () => getParkingPlaces(context),
-            ));
+        snackbar(
+          context,
+          text: failure.message,
+          duration: Duration(seconds: 3),
+        );
     }, (parkingLocations) {
       parkingLocations.forEach((element) async {
         _parkingMarkers.add(

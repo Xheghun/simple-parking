@@ -16,7 +16,7 @@ class ParkingSpots extends StatelessWidget {
   void networkCheck(BuildContext context, ParkingMapViewmodel model) async {
     if (!await model.hasNetwork)
       snackbar(context,
-          text: NETWORK_ERROR_MESSAGE, duration: Duration(minutes: 5));
+          text: NETWORK_ERROR_MESSAGE, duration: Duration(seconds: 3));
   }
 
   @override
