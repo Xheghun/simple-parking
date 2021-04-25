@@ -15,6 +15,7 @@ class SearchPage extends StatelessWidget {
               onPressed: () => Navigator.pop(context),
             ),
             hintText: "Enter city name",
+            
           ),
         ),
       ),
