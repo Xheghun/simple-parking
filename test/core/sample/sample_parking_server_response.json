@@ -1,0 +1,16 @@
+{ "results": [{
+    "business_status": "operating",
+    "geometry": {
+        "location": {
+            "lat": 93838.3,
+            "lng": 2882.2
+        }
+    },
+    "icon": "icon.png",
+    "name": "Car park",
+    "place_id": "place_id",
+    "rating": 4.9,
+    "user_rating_total": 6,
+    "vicinity": "place"
+}]
+}
