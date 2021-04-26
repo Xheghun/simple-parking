@@ -35,6 +35,11 @@ class ParkingMapViewmodel extends BaseViewmodel {
 
   Completer get controller => _controller;
   Location get location => _location;
+  set location(Location location) {
+    _location = location;
+    notifyListeners();
+  }
+
   Set<Marker> get parkingMarkers => _parkingMarkers;
   Future<bool> get hasNetwork async =>
       await _networkInfoContract.hasNetworkConnection();
