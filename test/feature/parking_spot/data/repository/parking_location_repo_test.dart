@@ -1,7 +1,9 @@
 import 'package:dartz/dartz.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/mockito.dart';
+import 'package:simple_parking/core/entities/parking_place.dart';
 import 'package:simple_parking/core/errors/codes.dart';
+import 'package:simple_parking/core/errors/server_error.dart';
 import 'package:simple_parking/core/failure/failure.dart';
 import 'package:simple_parking/core/network/network_info.dart';
 import 'package:simple_parking/feature/parking_spot/data/data_sources/local/location_datasoucre.dart';
@@ -63,6 +65,7 @@ main() {
 
   group('getNearbyParking', () {
     Location testLocation = Location(lat: 25.2, lng: 2772.8);
+    List<ParkingPlace> testParkingPlace = [ParkingPlace()];
     test('should return network failure when there\'s no internet connection',
         () async {
       when(mockNetworkInfo.hasNetworkConnection())
@@ -73,6 +76,37 @@ main() {
 
       verifyZeroInteractions(mockLocationDataSource);
       expect(result, equals(Left(NetworkFailure(NETWORK_ERROR_MESSAGE))));
+    });
+
+    test('should return ServerFailure if request is not sucessfull', () async {
+      //arrange
+      when(mockNetworkInfo.hasNetworkConnection())
+          .thenAnswer((_) async => true);
+
+      when(mockParkingPlaceRemoteDataSource.getNearbyParking(testLocation))
+          .thenThrow(ServerError());
+
+//act
+      var result =
+          await parkingLocationRepositoryImpl.getNearbyParking(testLocation);
+      verifyZeroInteractions(mockLocationDataSource);
+      expect(result, Left(ServerFailure(SERVER_ERROR_MESSAGE)));
+    });
+
+    test('should return a list of [ParkingPlace] if request is successful',
+        () async {
+      when(mockNetworkInfo.hasNetworkConnection())
+          .thenAnswer((_) async => true);
+
+      when(mockParkingPlaceRemoteDataSource.getNearbyParking(any))
+          .thenAnswer(((_) async => testParkingPlace));
+
+      var result =
+          await parkingLocationRepositoryImpl.getNearbyParking(testLocation);
+
+      verifyZeroInteractions(mockLocationDataSource);
+      verify(mockParkingPlaceRemoteDataSource.getNearbyParking(testLocation));
+      expect(result, equals(Right(testParkingPlace)));
     });
   });
 }
