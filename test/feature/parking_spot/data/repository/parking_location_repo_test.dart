@@ -1,6 +1,8 @@
 import 'package:dartz/dartz.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/mockito.dart';
+import 'package:simple_parking/core/errors/codes.dart';
+import 'package:simple_parking/core/failure/failure.dart';
 import 'package:simple_parking/core/network/network_info.dart';
 import 'package:simple_parking/feature/parking_spot/data/data_sources/local/location_datasoucre.dart';
 import 'package:simple_parking/feature/parking_spot/data/data_sources/remote/parking_place_remote_datasource.dart';
@@ -59,6 +61,18 @@ main() {
     });
   });
 
+  group('getNearbyParking', () {
+    Location testLocation = Location(lat: 25.2, lng: 2772.8);
+    test('should return network failure when there\'s no internet connection',
+        () async {
+      when(mockNetworkInfo.hasNetworkConnection())
+          .thenAnswer((_) async => false);
 
+      var result =
+          await parkingLocationRepositoryImpl.getNearbyParking(testLocation);
 
+      verifyZeroInteractions(mockLocationDataSource);
+      expect(result, equals(Left(NetworkFailure(NETWORK_ERROR_MESSAGE))));
+    });
+  });
 }
