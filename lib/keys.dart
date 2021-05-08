@@ -1,1 +1,0 @@
-const String GOOGLE_API_KEY = "AIzaSyAu0fYDVLK9XN8m8RgCTYeg85ynenJzmUE";
